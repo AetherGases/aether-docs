@@ -1,0 +1,45 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="j9lp1_PibIZfbdili5xr">
+    <mxGraphModel dx="1351" dy="946" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-6" edge="1" parent="1" source="VmXIYWJeLTbHdQ5vFWFi-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" target="VmXIYWJeLTbHdQ5vFWFi-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-7" edge="1" parent="1" source="VmXIYWJeLTbHdQ5vFWFi-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" target="VmXIYWJeLTbHdQ5vFWFi-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-12" edge="1" parent="1" source="VmXIYWJeLTbHdQ5vFWFi-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" target="VmXIYWJeLTbHdQ5vFWFi-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-13" edge="1" parent="1" source="VmXIYWJeLTbHdQ5vFWFi-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;endArrow=none;endFill=0;" target="VmXIYWJeLTbHdQ5vFWFi-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" value="&lt;div&gt;Administrador&lt;/div&gt;" vertex="1">
+          <mxGeometry height="110" width="55" x="40" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div&gt;Analise de dados&amp;nbsp;&lt;/div&gt;&lt;div&gt;sobre plantas&amp;nbsp;&lt;/div&gt;&lt;div&gt;individuais&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="314" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-5" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="CRUD administrativo" vertex="1">
+          <mxGeometry height="70" width="140" x="314" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-8" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div&gt;Analise de dados&amp;nbsp;&lt;/div&gt;&lt;div&gt;sobre a empresa&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="314" y="153" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-9" parent="1" style="ellipse;whiteSpace=wrap;html=1;" value="&lt;div&gt;Exportar análise&amp;nbsp;&lt;/div&gt;&lt;div&gt;como PDF&lt;/div&gt;" vertex="1">
+          <mxGeometry height="70" width="140" x="314" y="267" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-10" parent="1" style="html=1;dropTarget=0;whiteSpace=wrap;" value="&lt;div&gt;«Annotation»&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;b&gt;Separação em camadas de permissionamento&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="90" width="180" x="620" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="VmXIYWJeLTbHdQ5vFWFi-11" parent="VmXIYWJeLTbHdQ5vFWFi-10" style="shape=module;jettyWidth=8;jettyHeight=4;" value="" vertex="1">
+          <mxGeometry height="20" relative="1" width="20" x="1" as="geometry">
+            <mxPoint x="-27" y="7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
