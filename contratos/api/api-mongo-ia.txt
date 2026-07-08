@@ -1,0 +1,117 @@
+========================================
+GET /aether-api/v1/ai/user/{id_external_user}
+========================================
+
+Headers
+-------
+Authorization: Bearer <jwtToken>
+
+Response
+--------
+{
+    id_external_user: int,
+    role: string,
+    usecase: string
+}
+
+
+========================================
+GET /aether-api/v1/ai/session/{id_external_user}
+========================================
+
+Headers
+-------
+Authorization: Bearer <jwtToken>
+
+Response
+--------
+[
+    {
+        id_external_user: int,
+        name: string,
+        messages: [
+            {
+                input: string,
+                output: string,
+                submitted_at: date,
+                llm: string,
+                input_tokens: int,
+                output_tokens: int
+            }
+        ]
+    }
+]
+
+
+========================================
+GET /aether-api/v1/ai/gas-reduction/{id_external_gas_reduction}/improvement-plan
+========================================
+
+Headers
+-------
+Authorization: Bearer <jwtToken>
+
+Response
+--------
+{
+    defined_problem: string,
+    method: string,
+    reasoning: string,
+    updated_at: date
+}
+
+
+========================================
+POST /aether-api/v1/ai/message
+========================================
+
+Headers
+-------
+Authorization: Bearer <jwtToken>
+
+Request Body
+------------
+{
+    input: string,
+    session_id: _id
+}
+
+Response
+--------
+{
+    output: string,
+    submitted_at: date,
+    llm: string,
+    input_tokens: int,
+    output_tokens: int
+}
+
+
+========================================
+POST /aether-api/v1/ai/report
+========================================
+
+Headers
+-------
+Authorization: Bearer <jwtToken>
+
+Request Body
+------------
+{
+    id_external_user: int,
+    id_external_gas_reduction: int | null, // null = creates a new gas_reduction
+    input_report_path: string
+}
+
+Response
+--------
+{
+    id_external_report: int,
+    gas: string,
+    emitted_tons: float,
+    observations: [
+        {
+            text: string
+        }
+    ]
+}
