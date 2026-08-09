@@ -1,0 +1,1915 @@
+openapi: 3.0.3
+info:
+  title: Aether Core API
+  version: 1.0.0
+  description: HTTP API para autenticação, gestão de inventários de emissões, cálculo de retorno (ROI) e emissão de relatórios.
+servers:
+  - url: /
+
+tags:
+  - name: Auth
+    description: Rotas para realizar autenticação e troca de senhas ao esquecer.
+  - name: Profile
+    description: Rotas para consultar e editar os dados do funcionário autenticado.
+  - name: Inventory
+    description: Rotas para envio, aprovação, reprovação e consulta do histórico de inventários (relatórios) de emissões.
+  - name: ROI Calculator
+    description: Rotas para simular a substituição de um gás poluente por uma alternativa verde e estimar redução de emissões, retorno financeiro e investimento inicial.
+  - name: Emission
+    description: Rotas para cadastro, edição, remoção e consulta de emissões dentro de um inventário.
+
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Realiza login um usuário no sistema.
+      description: Busca e valida a senha de um usuário.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequestDTO'
+      responses:
+        '200':
+          description: Login realizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginOutputDTO'
+              example:
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao
+        '401':
+          description: Login incorreto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Usuário e/ou senha inválidos.
+                status: 401
+        '404':
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Usuário e/ou senha inválidos.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/auth/refresh/{email}:
+    post:
+      tags:
+        - Auth
+      summary: Atualiza o JWT Token.
+      description: Valida o JWT Token atual e gera um novo.
+      parameters:
+        - name: email
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Login realizado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginOutputDTO'
+              example:
+                token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao
+        '401':
+          description: Login incorreto.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Usuário e/ou senha inválidos.
+                status: 401
+        '404':
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Usuário e/ou senha inválidos.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/auth/reset-password/send-code:
+    post:
+      tags:
+        - Auth
+      summary: Envia um código para validar e trocar a senha.
+      description: Busca um usuário, caso exista envia um código para o e-mail informado.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendCodeRequestDTO'
+      responses:
+        '204':
+          description: Código enviado com sucesso.
+        '400':
+          description: E-mail inválido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O e-mail informado possui formato inválido.
+                status: 400
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/auth/reset-password/validate-code:
+    post:
+      tags:
+        - Auth
+      summary: Valida se o código enviado para o usuário está correto.
+      description: Verifica se o código informado como parâmetro é válido para o e-mail informado.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidateCodeRequestDTO'
+      responses:
+        '200':
+          description: Código validado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidateCodeOutputDTO'
+              example:
+                message: Código validado com sucesso.
+        '400':
+          description: Código inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O código informado é inválido ou expirou.
+                status: 400
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/auth/reset-password/confirm:
+    post:
+      tags:
+        - Auth
+      summary: Confirma a troca de senha após a validação do código.
+      description: Verifica novamente se o código informado é válido para o e-mail e, em caso positivo, atualiza a senha do usuário.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfirmResetPasswordRequestDTO'
+      responses:
+        '204':
+          description: Senha alterada com sucesso.
+        '400':
+          description: Código inválido, expirado ou senha em formato inválido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O código informado é inválido ou expirou.
+                status: 400
+        '404':
+          description: Usuário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Usuário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+                
+  /api/profile/me:
+    get:
+      tags:
+        - Profile
+      summary: Retorna os dados do funcionário autenticado.
+      description: Busca os dados do employee vinculado ao token JWT enviado.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dados retornados com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeOutputDTO'
+              example:
+                id: 1
+                name: João da Silva
+                email: joao.silva@email.com
+                phone: "11987654321"
+                idStorageFile: 42
+                createdAt: "2025-01-10T14:30:00"
+                updatedAt: "2025-03-02T09:15:00"
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Funcionário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Funcionário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+    patch:
+      tags:
+        - Profile
+      summary: Edita os dados do funcionário autenticado.
+      description: Atualiza name, email, phone e/ou idStorageFile do employee vinculado ao token JWT enviado. Não altera a senha.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmployeeRequestDTO'
+      responses:
+        '200':
+          description: Dados atualizados com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeeOutputDTO'
+              example:
+                id: 1
+                name: João da Silva
+                email: joao.silva@email.com
+                phone: "11987654321"
+                idStorageFile: 42
+                createdAt: "2025-01-10T14:30:00"
+                updatedAt: "2025-08-07T10:00:00"
+        '400':
+          description: Dados inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O e-mail informado possui formato inválido.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Funcionário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Funcionário não encontrado.
+                status: 404
+        '409':
+          description: E-mail já cadastrado para outro funcionário.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Este e-mail já está em uso por outro funcionário.
+                status: 409
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/profile/me/password:
+    patch:
+      tags:
+        - Profile
+      summary: Troca a senha do funcionário autenticado.
+      description: Valida a senha atual e, caso confira, atualiza para a nova senha informada. Rota separada da edição de dados por exigir a senha atual como confirmação.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChangePasswordRequestDTO'
+      responses:
+        '204':
+          description: Senha alterada com sucesso.
+        '400':
+          description: Nova senha em formato inválido.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: A nova senha deve ter entre 6 e 100 caracteres.
+                status: 400
+        '401':
+          description: Token ausente/inválido ou senha atual incorreta.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Senha atual incorreta.
+                status: 401
+        '404':
+          description: Funcionário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Funcionário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory:
+    post:
+      tags:
+        - Inventory
+      summary: Envia um novo inventário para análise.
+      description: Cria um inventário vinculado ao funcionário autenticado (owner) e o envia para revisão do funcionário validador informado. Status inicial é PENDING.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInventoryRequestDTO'
+      responses:
+        '201':
+          description: Inventário enviado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryOutputDTO'
+              example:
+                id: 12
+                name: "Relatório sobre fulano the town"
+                status: PENDING
+                submittedAt: "2026-03-20T09:14:00"
+                reviewedAt: null
+                rejectionReason: null
+        '400':
+          description: Dados inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O período de inventário informado é inválido.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Departamento ou funcionário validador não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Funcionário validador não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+    get:
+      tags:
+        - Inventory
+      summary: Lista o histórico de inventários.
+      description: Retorna os inventários visíveis para o funcionário autenticado, com busca por nome, filtro por status e ordenação por data de envio. Usado nas telas de "Histórico".
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: search
+          in: query
+          required: false
+          schema:
+            type: string
+          description: Filtra pelo nome do relatório/empresa.
+        - name: status
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [PENDING, APPROVED, REJECTED, LATE]
+          description: LATE representa inventários PENDING cujo dueDate já expirou (calculado, não persistido).
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [RECENT, OLDEST]
+            default: RECENT
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 1
+        - name: pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Histórico retornado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryHistoryOutputDTO'
+              example:
+                total: 5
+                page: 1
+                pageSize: 20
+                items:
+                  - id: 12
+                    name: "Relatório sobre fulano the town"
+                    status: PENDING
+                    ownerEmployeeName: "Daniel Sagaz"
+                    submittedAt: "2026-03-20T09:14:00"
+                    dueDate: "2026-07-24"
+                  - id: 11
+                    name: "Relatório sobre fulano the town"
+                    status: APPROVED
+                    ownerEmployeeName: "Daniel Sagaz"
+                    submittedAt: "2026-02-28T15:02:00"
+                    dueDate: "2026-06-24"
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory/{id}:
+    get:
+      tags:
+        - Inventory
+      summary: Retorna os dados detalhados de um inventário.
+      description: Busca um inventário pelo id, com os dados necessários para a tela de revisão (identificação, status, período, criador e validador).
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Inventário retornado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryDetailOutputDTO'
+              example:
+                id: 12
+                name: "JBS S.A."
+                status: PENDING
+                description: "Descrição do inventário enviado para análise."
+                inventoryingPeriodStart: "2025-07-23"
+                inventoryingPeriodEnd: "2025-08-20"
+                dueDate: "2026-07-24"
+                createdAt: "2026-05-29T08:14:00"
+                submittedAt: "2026-05-29T09:00:00"
+                reviewedAt: null
+                rejectionReason: null
+                ownerEmployeeName: "Daniel Sagaz"
+                validatorEmployeeName: "Nisfiel Grandão"
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Inventário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Inventário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory/{id}/approve:
+    patch:
+      tags:
+        - Inventory
+      summary: Aprova um inventário.
+      description: Muda o status do inventário de PENDING para APPROVED. Somente o funcionário validador vinculado ao inventário pode executar esta ação.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Inventário aprovado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryOutputDTO'
+              example:
+                id: 12
+                status: APPROVED
+                reviewedAt: "2026-05-31T10:22:00"
+                rejectionReason: null
+        '400':
+          description: Inventário não está pendente e não pode ser aprovado novamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Este inventário já foi analisado e não pode ser aprovado novamente.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '403':
+          description: Funcionário sem permissão para aprovar este inventário.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Você não tem permissão para aprovar este inventário.
+                status: 403
+        '404':
+          description: Inventário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Inventário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory/{id}/reject:
+    patch:
+      tags:
+        - Inventory
+      summary: Reprova um inventário.
+      description: Muda o status do inventário de PENDING para REJECTED. Exige um motivo, exibido posteriormente para quem enviou o relatório (campo "Relatório reprovado" nas telas de análise).
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RejectInventoryRequestDTO'
+      responses:
+        '200':
+          description: Inventário reprovado com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryOutputDTO'
+              example:
+                id: 12
+                status: REJECTED
+                reviewedAt: "2026-05-31T10:22:00"
+                rejectionReason: "O envio de acessórios e itens de vestuário digitáveis apresentados diverge do relatório anterior."
+        '400':
+          description: Motivo da reprovação não informado ou inventário não está pendente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O motivo da reprovação é obrigatório.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '403':
+          description: Funcionário sem permissão para reprovar este inventário.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Você não tem permissão para reprovar este inventário.
+                status: 403
+        '404':
+          description: Inventário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Inventário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/scope:
+    get:
+      tags:
+        - Emission
+      summary: Lista os escopos disponíveis.
+      description: Retorna Escopo 1, 2 e 3, usados no dropdown "Escopo" da etapa "Emissão Atual".
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Escopos retornados com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ScopeOutputDTO'
+              example:
+                - id: 1
+                  name: "Escopo 1"
+                - id: 2
+                  name: "Escopo 2"
+                - id: 3
+                  name: "Escopo 3"
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/category:
+    get:
+      tags:
+        - Emission
+      summary: Lista as categorias disponíveis.
+      description: Retorna as categorias do GHG Protocol (relevantes principalmente para emissões de Escopo 3, upstream/downstream). Opcional na etapa "Emissão Atual", quando o escopo selecionado for Escopo 3.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: classification
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [UPSTREAM, DOWNSTREAM]
+          description: Filtra por classificação, aplicável apenas às categorias de Escopo 3.
+      responses:
+        '200':
+          description: Categorias retornadas com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CategoryOutputDTO'
+              example:
+                - id: 4
+                  name: "Transporte e distribuição (upstream)"
+                  classification: UPSTREAM
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory/{inventoryId}/emission:
+    post:
+      tags:
+        - Emission
+      summary: Cadastra uma emissão em um inventário.
+      description: Registra uma emissão (gás, escopo, categoria e quantidade em CO2e) vinculada ao inventário informado. Corresponde à etapa "Emissão Atual" da calculadora.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: inventoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmissionRequestDTO'
+      responses:
+        '201':
+          description: Emissão cadastrada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionOutputDTO'
+              example:
+                id: 101
+                quantityCo2e: 1700
+                methodologyDescription: null
+                supplierDataPercentage: null
+                gas:
+                  id: 3
+                  name: "Gás Carbônico"
+                  formula: "CO2"
+                scope:
+                  id: 1
+                  name: "Escopo 1"
+                category: null
+                createdAt: "2026-08-09T14:00:00"
+        '400':
+          description: Dados inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O volume emitido deve ser maior ou igual a zero.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Inventário, gás, escopo ou categoria não encontrados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Inventário não encontrado.
+                status: 404
+        '409':
+          description: Inventário já foi enviado/analisado e não aceita novas emissões.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Este inventário já foi enviado para análise e não pode mais ser editado.
+                status: 409
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+    get:
+      tags:
+        - Emission
+      summary: Lista as emissões cadastradas em um inventário.
+      description: Retorna todas as emissões vinculadas ao inventário informado, usado para montar a divisão por escopo e o total mapeado (telas "Visão Geral" e "Análise").
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: inventoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: idScope
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Emissões retornadas com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmissionOutputDTO'
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Inventário não encontrado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Inventário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory/{inventoryId}/emission/{emissionId}:
+    patch:
+      tags:
+        - Emission
+      summary: Edita uma emissão de um inventário.
+      description: Atualiza gás, escopo, categoria, quantidade e/ou metodologia de uma emissão já cadastrada. Só é permitido enquanto o inventário não foi enviado para análise.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: inventoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: emissionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmissionRequestDTO'
+      responses:
+        '200':
+          description: Emissão atualizada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmissionOutputDTO'
+        '400':
+          description: Dados inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O volume emitido deve ser maior ou igual a zero.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Inventário ou emissão não encontrados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Emissão não encontrada.
+                status: 404
+        '409':
+          description: Inventário já foi enviado/analisado e não aceita edições.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Este inventário já foi enviado para análise e não pode mais ser editado.
+                status: 409
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+    delete:
+      tags:
+        - Emission
+      summary: Remove uma emissão de um inventário.
+      description: Remove uma emissão cadastrada. Só é permitido enquanto o inventário não foi enviado para análise.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: inventoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: emissionId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Emissão removida com sucesso.
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Inventário ou emissão não encontrados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Emissão não encontrada.
+                status: 404
+        '409':
+          description: Inventário já foi enviado/analisado e não aceita remoções.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Este inventário já foi enviado para análise e não pode mais ser editado.
+                status: 409
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/gas:
+    get:
+      tags:
+        - ROI Calculator
+      summary: Lista os gases poluentes disponíveis.
+      description: Retorna os gases cadastrados, usados no dropdown "Tipo de gás poluente" da etapa "Emissão Atual" da calculadora.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: idScope
+          in: query
+          required: false
+          schema:
+            type: integer
+          description: Filtra gases pelo escopo informado, quando aplicável.
+      responses:
+        '200':
+          description: Gases retornados com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GasOutputDTO'
+              example:
+                - id: 3
+                  name: "Gás Carbônico"
+                  formula: "CO2"
+                  isBiogenic: false
+                  gwp: 1
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/green-alternative:
+    get:
+      tags:
+        - ROI Calculator
+      summary: Lista as alternativas verdes disponíveis.
+      description: Retorna as alternativas verdes cadastradas, usadas no dropdown "Gás verde que deseja simular" da etapa "Gás Verde" da calculadora.
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Alternativas verdes retornadas com sucesso.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GreenAlternativeOutputDTO'
+              example:
+                - id: 1
+                  name: "Biometano"
+                  equivalentGasFormula: "CH4"
+                - id: 2
+                  name: "Energia solar fotovoltaica"
+                  equivalentGasFormula: "CO2"
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/roi-calculator/simulate:
+    post:
+      tags:
+        - ROI Calculator
+      summary: Simula a substituição de um gás poluente por uma alternativa verde.
+      description: >
+        Recebe o gás atual, o volume emitido, o escopo, a alternativa verde escolhida
+        e o prazo desejado para neutralização (etapas "Emissão Atual", "Gás Verde" e
+        "Prazo" da calculadora), e retorna o resultado principal, o impacto da
+        substituição, a série de redução ao longo do tempo e o retorno financeiro
+        estimado (tela "Resultados"). Não persiste dados — cálculo sob demanda.
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoiSimulationRequestDTO'
+      responses:
+        '200':
+          description: Simulação calculada com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoiSimulationOutputDTO'
+              example:
+                mainResult:
+                  quantityCo2e: 817
+                  percentageOfTotalEmitted: 28
+                  unit: "tCO2e/mês"
+                substitutionImpact:
+                  neutralizedQuantityCo2e: 423
+                  greenAlternativeName: "Biometano"
+                reductionOverTime:
+                  - month: 1
+                    quantityCo2e: 780
+                  - month: 2
+                    quantityCo2e: 690
+                  - month: 3
+                    quantityCo2e: 540
+                  - month: 4
+                    quantityCo2e: 460
+                  - month: 5
+                    quantityCo2e: 423
+                financialReturn:
+                  monthlyEstimatedSavings: 87400
+                  initialInvestment: 1220000
+        '400':
+          description: Dados inválidos (prazo ou volume informado incorretamente).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O volume emitido por mês deve ser maior que zero.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Gás, escopo ou alternativa verde informados não encontrados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Alternativa verde não encontrada.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+  /api/inventory/{inventoryId}/simulate:
+    post:
+      tags:
+        - ROI Calculator
+      summary: Simula e salva uma substituição vinculada a um inventário.
+      description: >
+        Mesmo cálculo de `/api/roi-calculator/simulate`, mas vinculado a um
+        inventário existente e persistido na tabela reduction — é o que alimenta
+        os blocos "Substituição prioritária" e "Substituição secundária" na tela
+        de Análise do inventário. O campo `priority` define em qual dos dois
+        blocos o resultado aparece.
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: inventoryId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/RoiSimulationRequestDTO'
+                - type: object
+                  required:
+                    - priority
+                  properties:
+                    priority:
+                      type: string
+                      enum: [PRIMARY, SECONDARY]
+                      description: Define se o resultado aparece como "Substituição prioritária" ou "secundária".
+      responses:
+        '201':
+          description: Simulação vinculada ao inventário e salva com sucesso.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoiSimulationOutputDTO'
+        '400':
+          description: Dados inválidos.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: O volume emitido por mês deve ser maior que zero.
+                status: 400
+        '401':
+          description: Token ausente, inválido ou expirado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Token inválido ou expirado.
+                status: 401
+        '404':
+          description: Inventário, gás, escopo ou alternativa verde não encontrados.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Inventário não encontrado.
+                status: 404
+        '500':
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorOutputDTO'
+              example:
+                message: Ocorreu um erro inesperado, tente novamente mais tarde.
+                status: 500
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LoginRequestDTO:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@email.com
+        password:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 100
+          example: senha123
+
+    SendCodeRequestDTO:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@email.com
+
+    ValidateCodeRequestDTO:
+      type: object
+      required:
+        - email
+        - code
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@email.com
+        code:
+          type: string
+          minLength: 6
+          maxLength: 6
+          example: "123456"
+
+    ConfirmResetPasswordRequestDTO:
+      type: object
+      required:
+        - email
+        - code
+        - newPassword
+      properties:
+        email:
+          type: string
+          format: email
+          example: user@email.com
+        code:
+          type: string
+          minLength: 6
+          maxLength: 6
+          example: "123456"
+        newPassword:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 28
+          example: novaSenha123
+        confirmedPassword:
+          type: string
+          format: password
+          minLength: 8
+          maxLength: 28
+          example: novaSenha123
+
+    LoginOutputDTO:
+      type: object
+      properties:
+        token:
+          type: string
+          description: A JWT token.
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.dyt0CoTl4WoVjAHI9Q_CwSKhl6d_9rhM3NrXuJttkao
+
+    ValidateCodeOutputDTO:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Código validado com sucesso.
+
+    ErrorOutputDTO:
+      type: object
+      properties:
+        message:
+          type: string
+        status:
+          type: integer
+          
+    UpdateEmployeeRequestDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          example: João da Silva
+        email:
+          type: string
+          format: email
+          maxLength: 150
+          example: joao.silva@email.com
+        phone:
+          type: string
+          minLength: 8
+          maxLength: 20
+          example: "11987654321"
+        idStorageFile:
+          type: integer
+          nullable: true
+          example: 42
+
+    EmployeeOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: João da Silva
+        email:
+          type: string
+          format: email
+          example: joao.silva@email.com
+        phone:
+          type: string
+          example: "11987654321"
+        idStorageFile:
+          type: integer
+          nullable: true
+          description: Referência do arquivo de foto/avatar armazenado.
+          example: 42
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    ChangePasswordRequestDTO:
+      type: object
+      required:
+        - currentPassword
+        - newPassword
+      properties:
+        currentPassword:
+          type: string
+          format: password
+          example: senha123
+        newPassword:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 100
+          example: novaSenha456
+        confirmPassword:
+          type: string
+          format: password
+          minLength: 6
+          maxLength: 100
+          example: novaSenha456
+
+    # ---------------------------------------------------
+    # Inventory
+    # ---------------------------------------------------
+    InventoryStatus:
+      type: string
+      enum: [PENDING, APPROVED, REJECTED]
+      description: >
+        Status persistido do inventário. "LATE" (Atrasado), visto nos filtros
+        de histórico, não é persistido — é calculado comparando dueDate com
+        a data atual apenas para inventários em PENDING.
+
+    CreateInventoryRequestDTO:
+      type: object
+      required:
+        - name
+        - inventoryingPeriodStart
+        - inventoryingPeriodEnd
+        - idDepartment
+        - idValidatorEmployee
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 150
+          example: "Relatório sobre fulano the town"
+        description:
+          type: string
+          maxLength: 150
+        consolidationApproach:
+          type: string
+          maxLength: 100
+        inventoryingPeriodStart:
+          type: string
+          format: date
+        inventoryingPeriodEnd:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+          description: Prazo para revisão do inventário pelo validador.
+        idDepartment:
+          type: integer
+        idValidatorEmployee:
+          type: integer
+          description: Funcionário (gerente) responsável por aprovar/reprovar o inventário.
+        idStorageFile:
+          type: integer
+          nullable: true
+
+    InventoryOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/InventoryStatus'
+        submittedAt:
+          type: string
+          format: date-time
+          nullable: true
+        reviewedAt:
+          type: string
+          format: date-time
+          nullable: true
+        rejectionReason:
+          type: string
+          nullable: true
+
+    InventoryDetailOutputDTO:
+      allOf:
+        - $ref: '#/components/schemas/InventoryOutputDTO'
+        - type: object
+          properties:
+            description:
+              type: string
+            inventoryingPeriodStart:
+              type: string
+              format: date
+            inventoryingPeriodEnd:
+              type: string
+              format: date
+            dueDate:
+              type: string
+              format: date
+              nullable: true
+            createdAt:
+              type: string
+              format: date-time
+            ownerEmployeeName:
+              type: string
+            validatorEmployeeName:
+              type: string
+
+    InventoryHistoryItemDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/InventoryStatus'
+        ownerEmployeeName:
+          type: string
+        submittedAt:
+          type: string
+          format: date-time
+          nullable: true
+        dueDate:
+          type: string
+          format: date
+          nullable: true
+
+    InventoryHistoryOutputDTO:
+      type: object
+      properties:
+        total:
+          type: integer
+        page:
+          type: integer
+        pageSize:
+          type: integer
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InventoryHistoryItemDTO'
+
+    RejectInventoryRequestDTO:
+      type: object
+      required:
+        - reason
+      properties:
+        reason:
+          type: string
+          minLength: 5
+          maxLength: 500
+          example: "O envio de acessórios e itens de vestuário digitáveis apresentados diverge do relatório anterior."
+
+    ScopeOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    CategoryOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        classification:
+          type: string
+          enum: [UPSTREAM, DOWNSTREAM]
+          nullable: true
+
+    CreateEmissionRequestDTO:
+      type: object
+      required:
+        - idGas
+        - idScope
+        - quantityCo2e
+      properties:
+        idGas:
+          type: integer
+          description: Gás poluente selecionado no dropdown "Tipo de gás poluente".
+        idScope:
+          type: integer
+        idCategory:
+          type: integer
+          nullable: true
+          description: Obrigatório apenas quando o escopo selecionado for Escopo 3.
+        quantityCo2e:
+          type: number
+          description: Volume emitido por mês, já em tCO2e/mês.
+          example: 1700
+        methodologyDescription:
+          type: string
+          maxLength: 150
+          nullable: true
+        supplierDataPercentage:
+          type: number
+          minimum: 0
+          maximum: 100
+          nullable: true
+
+    UpdateEmissionRequestDTO:
+      type: object
+      properties:
+        idGas:
+          type: integer
+        idScope:
+          type: integer
+        idCategory:
+          type: integer
+          nullable: true
+        quantityCo2e:
+          type: number
+        methodologyDescription:
+          type: string
+          maxLength: 150
+          nullable: true
+        supplierDataPercentage:
+          type: number
+          minimum: 0
+          maximum: 100
+          nullable: true
+
+    EmissionOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        quantityCo2e:
+          type: number
+        methodologyDescription:
+          type: string
+          nullable: true
+        supplierDataPercentage:
+          type: number
+          nullable: true
+        gas:
+          $ref: '#/components/schemas/GasOutputDTO'
+        scope:
+          $ref: '#/components/schemas/ScopeOutputDTO'
+        category:
+          $ref: '#/components/schemas/CategoryOutputDTO'
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    GasOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        formula:
+          type: string
+        isBiogenic:
+          type: boolean
+        gwp:
+          type: number
+
+    GreenAlternativeOutputDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+          example: "Biometano"
+        equivalentGasFormula:
+          type: string
+          example: "CH4"
+
+    RoiSimulationRequestDTO:
+      type: object
+      required:
+        - idScope
+        - idGas
+        - currentVolumeCo2e
+        - idGreenAlternative
+        - termMonths
+      properties:
+        idScope:
+          type: integer
+          description: Escopo da emissão atual (dropdown "Escopo" da etapa "Emissão Atual").
+        idGas:
+          type: integer
+          description: Gás poluente atual.
+        currentVolumeCo2e:
+          type: number
+          description: Volume emitido por mês, em tCO2e/mês.
+          example: 1700
+        idGreenAlternative:
+          type: integer
+          description: Alternativa verde escolhida para simular a substituição.
+        termMonths:
+          type: integer
+          description: Prazo, em meses, que o usuário deseja para neutralizar a emissão.
+          minimum: 1
+          example: 6
+
+    RoiSimulationOutputDTO:
+      type: object
+      properties:
+        mainResult:
+          type: object
+          properties:
+            quantityCo2e:
+              type: number
+              example: 817
+            percentageOfTotalEmitted:
+              type: number
+              description: Percentual do total emitido que essa substituição representa.
+              example: 28
+            unit:
+              type: string
+              example: "tCO2e/mês"
+        substitutionImpact:
+          type: object
+          properties:
+            neutralizedQuantityCo2e:
+              type: number
+              example: 423
+            greenAlternativeName:
+              type: string
+              example: "Biometano"
+        reductionOverTime:
+          type: array
+          description: Série usada no gráfico "Redução ao longo do tempo".
+          items:
+            type: object
+            properties:
+              month:
+                type: integer
+              quantityCo2e:
+                type: number
+        financialReturn:
+          type: object
+          properties:
+            monthlyEstimatedSavings:
+              type: number
+              description: Economia mensal estimada, em R$.
+              example: 87400
+            initialInvestment:
+              type: number
+              description: Investimento inicial necessário, em R$.
+              example: 1220000
