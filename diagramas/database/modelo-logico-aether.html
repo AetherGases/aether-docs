@@ -1,0 +1,980 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aether · Modelo lógico</title><style>
+*{box-sizing:border-box}body{margin:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;font:14px/1.5 Arial,sans-serif;color:#20252a;background:white}.tools,.legend{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;border-bottom:1px solid #d5dce4;background:#f8fafc}.legend{padding:7px 16px;font-size:12px;gap:18px;background:white}button,a.action{font:inherit;border:1px solid #b5c0cd;border-radius:4px;background:white;color:#222;padding:6px 12px;text-decoration:none;cursor:pointer}button:hover,a.action:hover{background:#eaf0f7}button:focus-visible,a:focus-visible{outline:3px solid #2278be;outline-offset:2px}output{min-width:48px;text-align:center}.hint{margin-left:auto;color:#536271;font-size:12px}main{flex:1;min-height:0}#viewport{height:100%;overflow:auto;cursor:grab;touch-action:pan-x pan-y}#viewport.dragging{cursor:grabbing;user-select:none}#model{display:block;max-width:none}#model .node{cursor:pointer}#model .edge{cursor:help}#model .edge.active path{stroke:#006ac0;stroke-width:2.5}#model .edge.active circle{stroke:#006ac0;stroke-width:2}#model .node.active>polygon:last-of-type{stroke:#006ac0;stroke-width:2.5}dialog{width:min(960px,94vw);max-height:90vh;border:1px solid #a5b4c3;border-radius:8px;padding:24px}dialog::backdrop{background:#17202e88}.dialog-top{display:flex;align-items:center;justify-content:space-between;gap:20px}h2{margin:0;font-size:22px}h3{margin:22px 0 8px;font-size:16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f1f4f8;padding:16px;font:13px/1.6 Consolas,monospace}small{color:#536271}.count{margin-right:8px;font-weight:bold}.info-table{border-collapse:collapse;width:100%;margin-top:16px;font-size:13px}.info-table td,.info-table th{text-align:left;border-bottom:1px solid #d5dce4;padding:7px}code{font-family:Consolas,monospace}
+@media print{@page{size:A0 landscape;margin:10mm}body{height:auto;overflow:visible;display:block}.tools,.legend,dialog{display:none}main,#viewport{height:auto;overflow:visible}#model{width:100%!important;height:auto!important}}
+</style></head><body><div class="tools"><span class="count">Modelo lógico</span><button id="minus" aria-label="Diminuir zoom">−</button><output id="zoom">100%</output><button id="plus" aria-label="Aumentar zoom">+</button><button id="fit">Ajustar ao quadro</button><button id="actual">Tamanho de leitura</button><button id="enums">Domínios ENUM</button><button id="print">Imprimir / PDF</button><a id="download" class="action" download="modelo-logico-aether.svg">Baixar SVG</a><span class="hint">21 tabelas · 25 FKs · clique em uma tabela para ver restrições e SQL</span></div><div class="legend"><span><b>PK</b> primary key</span><span><b>FK</b> foreign key</span><span><b>UQ</b> unique · <b>UQ*</b> composite unique</span><span><b>NULL NO</b> obrigatório</span><span><b>○|</b> 0..1</span><span><b>||</b> 1..1</span><span><b>○&lt;</b> 0..N</span><span>Arraste para navegar · Ctrl + roda para zoom · passe o mouse para destacar uma FK</span></div><main><div id="viewport" role="region" aria-label="Diagrama lógico completo" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 5346.80 2443.20" id="model" role="img" aria-label="Modelo lógico dbAether2Year, com 21 tabelas e 25 referências entre chaves estrangeiras e primárias">
+<defs><pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 H 0 V 24" fill="none" stroke="#e4ecf6" stroke-width="0.7" /></pattern></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#grid)" /><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(50.4 2392.8)">
+<title>Logical</title>
+
+<g id="fk1" class="edge" data-parent="plan" data-child="plan_subscription" data-column="id_plan">
+<title>plan_subscription.id_plan → plan.id | parent per child: 0..1; children per parent: 0..N | ON DELETE CASCADE</title>
+<path fill="none" stroke="#333333" d="M 1396.0,-1311.4 H 1453.0 V -1311.0 H 1540.0" vector-effect="non-scaling-stroke" />
+<path d="M 1404.0,-1318.4 V -1304.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1419.0" cy="-1311.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 1524.0,-1311.0 L 1539.0,-1319.0 M 1524.0,-1311.0 L 1539.0,-1303.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1514.0" cy="-1311.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk0" class="edge" data-parent="address" data-child="enterprise" data-column="id_address">
+<title>enterprise.id_address → address.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 626.0,-496.2 H 676.0 V -554.2 H 770.0" vector-effect="non-scaling-stroke" />
+<path d="M 634.0,-503.2 V -489.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="649.0" cy="-496.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 754.0,-554.2 L 769.0,-562.2 M 754.0,-554.2 L 769.0,-546.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="744.0" cy="-554.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk5" class="edge" data-parent="address" data-child="unit" data-column="id_address">
+<title>unit.id_address → address.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 626.0,-496.2 H 1053.0 V -640.8000000000001 H 1540.0" vector-effect="non-scaling-stroke" />
+<path d="M 634.0,-503.2 V -489.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="649.0" cy="-496.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 1524.0,-640.8000000000001 L 1539.0,-648.8000000000001 M 1524.0,-640.8000000000001 L 1539.0,-632.8000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1514.0" cy="-640.8000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk2" class="edge" data-parent="enterprise" data-child="plan_subscription" data-column="id_enterprise">
+<title>plan_subscription.id_enterprise → enterprise.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 1396.0,-751.0 H 1468.0 V -1278.2 H 1540.0" vector-effect="non-scaling-stroke" />
+<path d="M 1404.0,-758.0 V -744.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1419.0" cy="-751.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 1524.0,-1278.2 L 1539.0,-1286.2 M 1524.0,-1278.2 L 1539.0,-1270.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1514.0" cy="-1278.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk4" class="edge" data-parent="enterprise" data-child="unit" data-column="id_enterprise">
+<title>unit.id_enterprise → enterprise.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 1396.0,-751.0 H 1490.0 V -673.6 H 1540.0" vector-effect="non-scaling-stroke" />
+<path d="M 1404.0,-758.0 V -744.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1419.0" cy="-751.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 1524.0,-673.6 L 1539.0,-681.6 M 1524.0,-673.6 L 1539.0,-665.6" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1514.0" cy="-673.6" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk7" class="edge" data-parent="enterprise" data-child="permission_group" data-column="id_enterprise">
+<title>permission_group.id_enterprise → enterprise.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 1396.0,-751.0 H 1468.0 V -17.4 H 1540.0" vector-effect="non-scaling-stroke" />
+<path d="M 1404.0,-758.0 V -744.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1419.0" cy="-751.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 1524.0,-17.4 L 1539.0,-25.4 M 1524.0,-17.4 L 1539.0,-9.399999999999999" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="1514.0" cy="-17.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk3" class="edge" data-parent="plan_subscription" data-child="payment" data-column="id_plan_subscription">
+<title>payment.id_plan_subscription → plan_subscription.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 2166.0,-1475.0 H 2253.0 V -1555.4 H 2310.0" vector-effect="non-scaling-stroke" />
+<path d="M 2174.0,-1482.0 V -1468.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2189.0" cy="-1475.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2294.0,-1555.4 L 2309.0,-1563.4 M 2294.0,-1555.4 L 2309.0,-1547.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2284.0" cy="-1555.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk6" class="edge" data-parent="unit" data-child="department" data-column="id_unit">
+<title>department.id_unit → unit.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 2166.0,-870.4000000000001 H 2223.0 V -533.6 H 2310.0" vector-effect="non-scaling-stroke" />
+<path d="M 2174.0,-877.4000000000001 V -863.4000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2189.0" cy="-870.4000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2294.0,-533.6 L 2309.0,-541.6 M 2294.0,-533.6 L 2309.0,-525.6" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2284.0" cy="-533.6" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk10" class="edge" data-parent="unit" data-child="parana_seal_forecast" data-column="id_unit">
+<title>parana_seal_forecast.id_unit → unit.id | parent per child: 0..1; children per parent: 0..N | ON DELETE CASCADE</title>
+<path fill="none" stroke="#333333" d="M 2166.0,-870.4000000000001 H 2216.0 V -874.2 H 2310.0" vector-effect="non-scaling-stroke" />
+<path d="M 2174.0,-877.4000000000001 V -863.4000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2189.0" cy="-870.4000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2294.0,-874.2 L 2309.0,-882.2 M 2294.0,-874.2 L 2309.0,-866.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2284.0" cy="-874.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk12" class="edge" data-parent="department" data-child="employee" data-column="id_department">
+<title>employee.id_department → department.id | parent per child: 1..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 2936.0,-697.6 H 3008.0 V -655.0 H 3080.0" vector-effect="non-scaling-stroke" />
+<path d="M 2944.0,-704.6 V -690.6" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2953.0,-704.6 V -690.6" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3064.0,-655.0 L 3079.0,-663.0 M 3064.0,-655.0 L 3079.0,-647.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3054.0" cy="-655.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk14" class="edge" data-parent="department" data-child="inventory" data-column="id_department">
+<title>inventory.id_department → department.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 2936.0,-697.6 H 3423.0 V -1127.4 H 3850.0" vector-effect="non-scaling-stroke" />
+<path d="M 2944.0,-704.6 V -690.6" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2959.0" cy="-697.6" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3834.0,-1127.4 L 3849.0,-1135.4 M 3834.0,-1127.4 L 3849.0,-1119.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3824.0" cy="-1127.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk9" class="edge" data-parent="permission_group" data-child="permission_group_permission" data-column="id_permission_group">
+<title>permission_group_permission.id_permission_group → permission_group.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 2166.0,-115.8 H 2260.0 V -226.0 H 2310.0" vector-effect="non-scaling-stroke" />
+<path d="M 2174.0,-122.8 V -108.8" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2189.0" cy="-115.8" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2294.0,-226.0 L 2309.0,-234.0 M 2294.0,-226.0 L 2309.0,-218.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2284.0" cy="-226.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk13" class="edge" data-parent="permission_group" data-child="employee" data-column="id_permission_group">
+<title>employee.id_permission_group → permission_group.id | parent per child: 1..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 2166.0,-115.8 H 2638.0 V -622.2 H 3080.0" vector-effect="non-scaling-stroke" />
+<path d="M 2174.0,-122.8 V -108.8" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2183.0,-122.8 V -108.8" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3064.0,-622.2 L 3079.0,-630.2 M 3064.0,-622.2 L 3079.0,-614.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3054.0" cy="-622.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk8" class="edge" data-parent="permission" data-child="permission_group_permission" data-column="id_permission">
+<title>permission_group_permission.id_permission → permission.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 2166.0,-456.59999999999997 H 2253.0 V -258.8 H 2310.0" vector-effect="non-scaling-stroke" />
+<path d="M 2174.0,-463.59999999999997 V -449.59999999999997" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2189.0" cy="-456.59999999999997" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 2294.0,-258.8 L 2309.0,-266.8 M 2294.0,-258.8 L 2309.0,-250.8" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2284.0" cy="-258.8" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk11" class="edge" data-parent="storage_file" data-child="employee" data-column="id_storage_file">
+<title>employee.id_storage_file → storage_file.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 2936.0,-1379.2 H 2993.0 V -687.8000000000001 H 3080.0" vector-effect="non-scaling-stroke" />
+<path d="M 2944.0,-1386.2 V -1372.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2959.0" cy="-1379.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3064.0,-687.8000000000001 L 3079.0,-695.8000000000001 M 3064.0,-687.8000000000001 L 3079.0,-679.8000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3054.0" cy="-687.8000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk15" class="edge" data-parent="storage_file" data-child="inventory" data-column="id_storage_file">
+<title>inventory.id_storage_file → storage_file.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 2936.0,-1379.2 H 3363.0 V -1094.6000000000001 H 3850.0" vector-effect="non-scaling-stroke" />
+<path d="M 2944.0,-1386.2 V -1372.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2959.0" cy="-1379.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3834.0,-1094.6000000000001 L 3849.0,-1102.6000000000001 M 3834.0,-1094.6000000000001 L 3849.0,-1086.6000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3824.0" cy="-1094.6000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk24" class="edge" data-parent="storage_file" data-child="reported_problem" data-column="id_storage_file">
+<title>reported_problem.id_storage_file → storage_file.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 2936.0,-1379.2 H 3030.0 V -1421.0 H 3080.0" vector-effect="non-scaling-stroke" />
+<path d="M 2944.0,-1386.2 V -1372.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="2959.0" cy="-1379.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3064.0,-1421.0 L 3079.0,-1429.0 M 3064.0,-1421.0 L 3079.0,-1413.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3054.0" cy="-1421.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk16" class="edge" data-parent="employee" data-child="inventory" data-column="id_owner_employee">
+<title>inventory.id_owner_employee → employee.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 3706.0,-983.0 H 3763.0 V -1061.8 H 3850.0" vector-effect="non-scaling-stroke" />
+<path d="M 3714.0,-990.0 V -976.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3729.0" cy="-983.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3834.0,-1061.8 L 3849.0,-1069.8 M 3834.0,-1061.8 L 3849.0,-1053.8" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3824.0" cy="-1061.8" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk17" class="edge" data-parent="employee" data-child="inventory" data-column="id_validator_employee">
+<title>inventory.id_validator_employee → employee.id | parent per child: 0..1; children per parent: 0..N | ON DELETE NO ACTION</title>
+<path fill="none" stroke="#333333" d="M 3706.0,-983.0 H 3778.0 V -1029.0 H 3850.0" vector-effect="non-scaling-stroke" />
+<path d="M 3714.0,-990.0 V -976.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3729.0" cy="-983.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 3834.0,-1029.0 L 3849.0,-1037.0 M 3834.0,-1029.0 L 3849.0,-1021.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="3824.0" cy="-1029.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk19" class="edge" data-parent="scope" data-child="emission" data-column="id_scope">
+<title>emission.id_scope → scope.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 4476.0,-1940.0 H 4570.0 V -1919.6000000000001 H 4620.0" vector-effect="non-scaling-stroke" />
+<path d="M 4484.0,-1947.0 V -1933.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4499.0" cy="-1940.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 4604.0,-1919.6000000000001 L 4619.0,-1927.6000000000001 M 4604.0,-1919.6000000000001 L 4619.0,-1911.6000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4594.0" cy="-1919.6000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk20" class="edge" data-parent="category" data-child="emission" data-column="id_category">
+<title>emission.id_category → category.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 4476.0,-1730.4 H 4526.0 V -1886.8 H 4620.0" vector-effect="non-scaling-stroke" />
+<path d="M 4484.0,-1737.4 V -1723.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4499.0" cy="-1730.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 4604.0,-1886.8 L 4619.0,-1894.8 M 4604.0,-1886.8 L 4619.0,-1878.8" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4594.0" cy="-1886.8" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk23" class="edge" data-parent="category" data-child="reduction" data-column="id_category">
+<title>reduction.id_category → category.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 4476.0,-1730.4 H 4563.0 V -1493.6000000000001 H 4620.0" vector-effect="non-scaling-stroke" />
+<path d="M 4484.0,-1737.4 V -1723.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4499.0" cy="-1730.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 4604.0,-1493.6000000000001 L 4619.0,-1501.6000000000001 M 4604.0,-1493.6000000000001 L 4619.0,-1485.6000000000001" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4594.0" cy="-1493.6000000000001" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk18" class="edge" data-parent="gas" data-child="emission" data-column="id_gas">
+<title>emission.id_gas → gas.id | parent per child: 0..1; children per parent: 0..N | ON DELETE RESTRICT</title>
+<path fill="none" stroke="#333333" d="M 4476.0,-2248.2 H 4563.0 V -1952.4 H 4620.0" vector-effect="non-scaling-stroke" />
+<path d="M 4484.0,-2255.2 V -2241.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4499.0" cy="-2248.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 4604.0,-1952.4 L 4619.0,-1960.4 M 4604.0,-1952.4 L 4619.0,-1944.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4594.0" cy="-1952.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk21" class="edge" data-parent="inventory" data-child="emission" data-column="id_inventory">
+<title>emission.id_inventory → inventory.id | parent per child: 0..1; children per parent: 0..N | ON DELETE CASCADE</title>
+<path fill="none" stroke="#333333" d="M 4476.0,-1488.2 H 4533.0 V -1854.0 H 4620.0" vector-effect="non-scaling-stroke" />
+<path d="M 4484.0,-1495.2 V -1481.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4499.0" cy="-1488.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 4604.0,-1854.0 L 4619.0,-1862.0 M 4604.0,-1854.0 L 4619.0,-1846.0" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4594.0" cy="-1854.0" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="fk22" class="edge" data-parent="inventory" data-child="reduction" data-column="id_inventory">
+<title>reduction.id_inventory → inventory.id | parent per child: 0..1; children per parent: 0..N | ON DELETE CASCADE</title>
+<path fill="none" stroke="#333333" d="M 4476.0,-1488.2 H 4548.0 V -1526.4 H 4620.0" vector-effect="non-scaling-stroke" />
+<path d="M 4484.0,-1495.2 V -1481.2" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4499.0" cy="-1488.2" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /><path d="M 4604.0,-1526.4 L 4619.0,-1534.4 M 4604.0,-1526.4 L 4619.0,-1518.4" stroke="#222" fill="none" stroke-width="1.3" vector-effect="non-scaling-stroke" /><circle cx="4594.0" cy="-1526.4" r="4.7" fill="white" stroke="#222" stroke-width="1.3" vector-effect="non-scaling-stroke" /></g>
+
+<g id="node1" class="node" data-table="plan">
+<title>plan</title>
+<polygon fill="white" stroke="none" points="770,-1064.4 770,-1405.6 1396,-1405.6 1396,-1064.4 770,-1064.4" />
+<polygon fill="#e5eaf0" stroke="none" points="771,-1357 771,-1404.6 1395,-1404.6 1395,-1357 771,-1357" />
+<text text-anchor="start" x="784" y="-1376.4" font-family="Arial" font-weight="bold" font-size="18.00">Plan</text>
+<text text-anchor="start" x="779" y="-1339.1" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="855" y="-1339.1" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="1110" y="-1339.1" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="1345" y="-1339.1" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="779" y="-1307.8" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="855" y="-1307.2" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="1110" y="-1307.5" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="1345" y="-1307.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-1275" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="855" y="-1274.4" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="1110" y="-1274.7" font-family="Arial" font-size="13.00">VARCHAR(50)</text>
+<text text-anchor="start" x="1345" y="-1275" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-1242.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-1241.6" font-family="Arial" font-size="14.00">description</text>
+<text text-anchor="start" x="1110" y="-1241.9" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="1345" y="-1242.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="779" y="-1209.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-1208.8" font-family="Arial" font-size="14.00">price</text>
+<text text-anchor="start" x="1110" y="-1209.1" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="1345" y="-1209.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-1176.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-1176" font-family="Arial" font-size="14.00">duration_days</text>
+<text text-anchor="start" x="1110" y="-1176.3" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="1345" y="-1176.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-1143.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-1143.2" font-family="Arial" font-size="14.00">is_active</text>
+<text text-anchor="start" x="1110" y="-1143.5" font-family="Arial" font-size="13.00">BOOLEAN</text>
+<text text-anchor="start" x="1345" y="-1143.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-1111" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-1110.4" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="1110" y="-1110.7" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="1345" y="-1111" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="779" y="-1078.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-1077.6" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="1110" y="-1077.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="1345" y="-1078.2" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="770,-1064.4 770,-1405.6 1396,-1405.6 1396,-1064.4 770,-1064.4" />
+</g>
+
+<g id="node2" class="node" data-table="address">
+<title>address</title>
+<polygon fill="white" stroke="none" points="0,-183.6 0,-590.4 626,-590.4 626,-183.6 0,-183.6" />
+<polygon fill="#e5eaf0" stroke="none" points="1,-541.8 1,-589.4 625,-589.4 625,-541.8 1,-541.8" />
+<text text-anchor="start" x="14" y="-561.2" font-family="Arial" font-weight="bold" font-size="18.00">Address</text>
+<text text-anchor="start" x="9" y="-523.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="85" y="-523.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="340" y="-523.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="575" y="-523.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="9" y="-492.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="85" y="-492" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="340" y="-492.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="575" y="-492.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-459.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-459.2" font-family="Arial" font-size="14.00">zip_code</text>
+<text text-anchor="start" x="340" y="-459.5" font-family="Arial" font-size="13.00">CHAR(8)</text>
+<text text-anchor="start" x="575" y="-459.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="9" y="-427" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-426.4" font-family="Arial" font-size="14.00">state</text>
+<text text-anchor="start" x="340" y="-426.7" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="575" y="-427" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-394.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-393.6" font-family="Arial" font-size="14.00">city</text>
+<text text-anchor="start" x="340" y="-393.9" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="575" y="-394.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-361.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-360.8" font-family="Arial" font-size="14.00">neighborhood</text>
+<text text-anchor="start" x="340" y="-361.1" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="575" y="-361.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-328.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-328" font-family="Arial" font-size="14.00">street</text>
+<text text-anchor="start" x="340" y="-328.3" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="575" y="-328.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-295.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-295.2" font-family="Arial" font-size="14.00">number</text>
+<text text-anchor="start" x="340" y="-295.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="575" y="-295.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-263" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-262.4" font-family="Arial" font-size="14.00">complement</text>
+<text text-anchor="start" x="340" y="-262.7" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="575" y="-263" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="9" y="-230.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-229.6" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="340" y="-229.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="575" y="-230.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="9" y="-197.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-196.8" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="340" y="-197.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="575" y="-197.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="0,-183.6 0,-590.4 626,-590.4 626,-183.6 0,-183.6" />
+</g>
+
+<g id="node3" class="node" data-table="enterprise">
+<title>enterprise</title>
+<polygon fill="white" stroke="none" points="770,-536.8 770,-845.2 1396,-845.2 1396,-536.8 770,-536.8" />
+<polygon fill="#e5eaf0" stroke="none" points="771,-796.6 771,-844.2 1395,-844.2 1395,-796.6 771,-796.6" />
+<text text-anchor="start" x="784" y="-816" font-family="Arial" font-weight="bold" font-size="18.00">Enterprise</text>
+<text text-anchor="start" x="779" y="-778.7" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="855" y="-778.7" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="1110" y="-778.7" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="1345" y="-778.7" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="779" y="-747.4" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="855" y="-746.8" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="1110" y="-747.1" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="1345" y="-747.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-714.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-714" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="1110" y="-714.3" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="1345" y="-714.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-681.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-681.2" font-family="Arial" font-size="14.00">trade_name</text>
+<text text-anchor="start" x="1110" y="-681.5" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="1345" y="-681.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="779" y="-649" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="855" y="-648.4" font-family="Arial" font-size="14.00">cnpj</text>
+<text text-anchor="start" x="1110" y="-648.7" font-family="Arial" font-size="13.00">CHAR(14)</text>
+<text text-anchor="start" x="1345" y="-649" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="779" y="-616.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-615.6" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="1110" y="-615.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="1345" y="-616.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="779" y="-583.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="855" y="-582.8" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="1110" y="-583.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="1345" y="-583.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="779" y="-550.6" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="855" y="-550" font-family="Arial" font-size="14.00">id_address</text>
+<text text-anchor="start" x="1110" y="-550.3" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="1345" y="-550.6" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="770,-536.8 770,-845.2 1396,-845.2 1396,-536.8 770,-536.8" />
+</g>
+
+<g id="node4" class="node" data-table="plan_subscription">
+<title>plan_subscription</title>
+<polygon fill="white" stroke="none" points="1540,-1260.8 1540,-1569.2 2166,-1569.2 2166,-1260.8 1540,-1260.8" />
+<polygon fill="#e5eaf0" stroke="none" points="1541,-1520.6 1541,-1568.2 2165,-1568.2 2165,-1520.6 1541,-1520.6" />
+<text text-anchor="start" x="1554" y="-1540" font-family="Arial" font-weight="bold" font-size="18.00">Plan_subscription</text>
+<text text-anchor="start" x="1549" y="-1502.7" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="1625" y="-1502.7" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="1880" y="-1502.7" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2115" y="-1502.7" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="1549" y="-1471.4" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="1625" y="-1470.8" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="1880" y="-1471.1" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2115" y="-1471.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-1438.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-1438" font-family="Arial" font-size="14.00">is_active</text>
+<text text-anchor="start" x="1880" y="-1438.3" font-family="Arial" font-size="13.00">BOOLEAN</text>
+<text text-anchor="start" x="2115" y="-1438.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-1405.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-1405.2" font-family="Arial" font-size="14.00">installments</text>
+<text text-anchor="start" x="1880" y="-1405.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2115" y="-1405.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-1373" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-1372.4" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="1880" y="-1372.7" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-1373" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-1340.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-1339.6" font-family="Arial" font-size="14.00">deactivated_at</text>
+<text text-anchor="start" x="1880" y="-1339.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-1340.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-1307.4" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="1625" y="-1306.8" font-family="Arial" font-size="14.00">id_plan</text>
+<text text-anchor="start" x="1880" y="-1307.1" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2115" y="-1307.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-1274.6" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="1625" y="-1274" font-family="Arial" font-size="14.00">id_enterprise</text>
+<text text-anchor="start" x="1880" y="-1274.3" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2115" y="-1274.6" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="1540,-1260.8 1540,-1569.2 2166,-1569.2 2166,-1260.8 1540,-1260.8" />
+</g>
+
+<g id="node5" class="node" data-table="payment">
+<title>payment</title>
+<polygon fill="white" stroke="none" points="2310,-1538 2310,-1912 2936,-1912 2936,-1538 2310,-1538" />
+<polygon fill="#e5eaf0" stroke="none" points="2311,-1863.4 2311,-1911 2935,-1911 2935,-1863.4 2311,-1863.4" />
+<text text-anchor="start" x="2324" y="-1882.8" font-family="Arial" font-weight="bold" font-size="18.00">Payment</text>
+<text text-anchor="start" x="2319" y="-1845.5" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="2395" y="-1845.5" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="2650" y="-1845.5" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2885" y="-1845.5" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="2319" y="-1814.2" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="2395" y="-1813.6" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="2650" y="-1813.9" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2885" y="-1814.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1781.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1780.8" font-family="Arial" font-size="14.00">value</text>
+<text text-anchor="start" x="2650" y="-1781.1" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="2885" y="-1781.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1748.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1748" font-family="Arial" font-size="14.00">term</text>
+<text text-anchor="start" x="2650" y="-1748.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-1748.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-1715.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1715.2" font-family="Arial" font-size="14.00">status</text>
+<text text-anchor="start" x="2650" y="-1715.5" font-family="Arial" font-size="13.00">PAYMENT_STATUS</text>
+<text text-anchor="start" x="2885" y="-1715.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1683" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1682.4" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="2650" y="-1682.7" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-1683" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-1650.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1649.6" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="2650" y="-1649.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-1650.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-1617.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1616.8" font-family="Arial" font-size="14.00">additional_use_value</text>
+<text text-anchor="start" x="2650" y="-1617.1" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="2885" y="-1617.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-1584.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1584" font-family="Arial" font-size="14.00">due_date</text>
+<text text-anchor="start" x="2650" y="-1584.3" font-family="Arial" font-size="13.00">DATE</text>
+<text text-anchor="start" x="2885" y="-1584.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1551.8" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="2395" y="-1551.2" font-family="Arial" font-size="14.00">id_plan_subscription</text>
+<text text-anchor="start" x="2650" y="-1551.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2885" y="-1551.8" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="2310,-1538 2310,-1912 2936,-1912 2936,-1538 2310,-1538" />
+</g>
+
+<g id="node6" class="node" data-table="unit">
+<title>unit</title>
+<polygon fill="white" stroke="none" points="1540,-623.4 1540,-964.6 2166,-964.6 2166,-623.4 1540,-623.4" />
+<polygon fill="#e5eaf0" stroke="none" points="1541,-916 1541,-963.6 2165,-963.6 2165,-916 1541,-916" />
+<text text-anchor="start" x="1554" y="-935.4" font-family="Arial" font-weight="bold" font-size="18.00">Unit</text>
+<text text-anchor="start" x="1549" y="-898.1" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="1625" y="-898.1" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="1880" y="-898.1" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2115" y="-898.1" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="1549" y="-866.8" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="1625" y="-866.2" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="1880" y="-866.5" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2115" y="-866.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-834" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-833.4" font-family="Arial" font-size="14.00">cnae</text>
+<text text-anchor="start" x="1880" y="-833.7" font-family="Arial" font-size="13.00">CHAR(7)</text>
+<text text-anchor="start" x="2115" y="-834" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-801.2" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="1625" y="-800.6" font-family="Arial" font-size="14.00">cnpj</text>
+<text text-anchor="start" x="1880" y="-800.9" font-family="Arial" font-size="13.00">CHAR(14)</text>
+<text text-anchor="start" x="2115" y="-801.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-768.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-767.8" font-family="Arial" font-size="14.00">is_active</text>
+<text text-anchor="start" x="1880" y="-768.1" font-family="Arial" font-size="13.00">BOOLEAN</text>
+<text text-anchor="start" x="2115" y="-768.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-735.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-735" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="1880" y="-735.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-735.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-702.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-702.2" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="1880" y="-702.5" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-702.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-670" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="1625" y="-669.4" font-family="Arial" font-size="14.00">id_enterprise</text>
+<text text-anchor="start" x="1880" y="-669.7" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2115" y="-670" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-637.2" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="1625" y="-636.6" font-family="Arial" font-size="14.00">id_address</text>
+<text text-anchor="start" x="1880" y="-636.9" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2115" y="-637.2" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="1540,-623.4 1540,-964.6 2166,-964.6 2166,-623.4 1540,-623.4" />
+</g>
+
+<g id="node7" class="node" data-table="department">
+<title>department</title>
+<polygon fill="white" stroke="none" points="2310,-516.2 2310,-791.8 2936,-791.8 2936,-516.2 2310,-516.2" />
+<polygon fill="#e5eaf0" stroke="none" points="2311,-743.2 2311,-790.8 2935,-790.8 2935,-743.2 2311,-743.2" />
+<text text-anchor="start" x="2324" y="-762.6" font-family="Arial" font-weight="bold" font-size="18.00">Department</text>
+<text text-anchor="start" x="2319" y="-725.3" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="2395" y="-725.3" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="2650" y="-725.3" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2885" y="-725.3" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="2319" y="-694" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="2395" y="-693.4" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="2650" y="-693.7" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2885" y="-694" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-661.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-660.6" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="2650" y="-660.9" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2885" y="-661.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-628.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-627.8" font-family="Arial" font-size="14.00">description</text>
+<text text-anchor="start" x="2650" y="-628.1" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2885" y="-628.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-595.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-595" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="2650" y="-595.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-595.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-562.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-562.2" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="2650" y="-562.5" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-562.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-530" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="2395" y="-529.4" font-family="Arial" font-size="14.00">id_unit</text>
+<text text-anchor="start" x="2650" y="-529.7" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2885" y="-530" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="2310,-516.2 2310,-791.8 2936,-791.8 2936,-516.2 2310,-516.2" />
+</g>
+
+<g id="node8" class="node" data-table="permission_group">
+<title>permission_group</title>
+<polygon fill="white" stroke="none" points="1540,0 1540,-210 2166,-210 2166,0 1540,0" />
+<polygon fill="#e5eaf0" stroke="none" points="1541,-161.4 1541,-209 2165,-209 2165,-161.4 1541,-161.4" />
+<text text-anchor="start" x="1554" y="-180.8" font-family="Arial" font-weight="bold" font-size="18.00">Permission_group</text>
+<text text-anchor="start" x="1549" y="-143.5" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="1625" y="-143.5" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="1880" y="-143.5" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2115" y="-143.5" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="1549" y="-112.2" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="1625" y="-111.6" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="1880" y="-111.9" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2115" y="-112.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-79.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-78.8" font-family="Arial" font-size="14.00">description</text>
+<text text-anchor="start" x="1880" y="-79.1" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2115" y="-79.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-46.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-46" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="1880" y="-46.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-46.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-13.8" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="1625" y="-13.2" font-family="Arial" font-size="14.00">id_enterprise</text>
+<text text-anchor="start" x="1880" y="-13.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2115" y="-13.8" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="1540,0 1540,-210 2166,-210 2166,0 1540,0" />
+</g>
+
+<g id="node9" class="node" data-table="permission">
+<title>permission</title>
+<polygon fill="white" stroke="none" points="1540,-275.2 1540,-550.8 2166,-550.8 2166,-275.2 1540,-275.2" />
+<polygon fill="#e5eaf0" stroke="none" points="1541,-502.2 1541,-549.8 2165,-549.8 2165,-502.2 1541,-502.2" />
+<text text-anchor="start" x="1554" y="-521.6" font-family="Arial" font-weight="bold" font-size="18.00">Permission</text>
+<text text-anchor="start" x="1549" y="-484.3" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="1625" y="-484.3" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="1880" y="-484.3" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2115" y="-484.3" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="1549" y="-453" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="1625" y="-452.4" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="1880" y="-452.7" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2115" y="-453" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-420.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-419.6" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="1880" y="-419.9" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2115" y="-420.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-387.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-386.8" font-family="Arial" font-size="14.00">description</text>
+<text text-anchor="start" x="1880" y="-387.1" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2115" y="-387.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-354.6" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="1625" y="-354" font-family="Arial" font-size="14.00">pattern</text>
+<text text-anchor="start" x="1880" y="-354.3" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2115" y="-354.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="1549" y="-321.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-321.2" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="1880" y="-321.5" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-321.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="1549" y="-289" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="1625" y="-288.4" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="1880" y="-288.7" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2115" y="-289" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="1540,-275.2 1540,-550.8 2166,-550.8 2166,-275.2 1540,-275.2" />
+</g>
+
+<g id="node10" class="node" data-table="permission_group_permission">
+<title>permission_group_permission</title>
+<polygon fill="white" stroke="none" points="2310,-208.6 2310,-451.4 2936,-451.4 2936,-208.6 2310,-208.6" />
+<polygon fill="#e5eaf0" stroke="none" points="2311,-402.8 2311,-450.4 2935,-450.4 2935,-402.8 2311,-402.8" />
+<text text-anchor="start" x="2324" y="-422.2" font-family="Arial" font-weight="bold" font-size="18.00">Permission_group_permission</text>
+<text text-anchor="start" x="2319" y="-384.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="2395" y="-384.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="2650" y="-384.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2885" y="-384.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="2319" y="-353.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="2395" y="-353" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="2650" y="-353.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2885" y="-353.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-320.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-320.2" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="2650" y="-320.5" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-320.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-288" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-287.4" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="2650" y="-287.7" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-288" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-255.2" font-family="Arial" font-size="12.00">FK / UQ*</text>
+<text text-anchor="start" x="2395" y="-254.6" font-family="Arial" font-size="14.00">id_permission</text>
+<text text-anchor="start" x="2650" y="-254.9" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2885" y="-255.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-222.4" font-family="Arial" font-size="12.00">FK / UQ*</text>
+<text text-anchor="start" x="2395" y="-221.8" font-family="Arial" font-size="14.00">id_permission_group</text>
+<text text-anchor="start" x="2650" y="-222.1" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2885" y="-222.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="2310,-208.6 2310,-451.4 2936,-451.4 2936,-208.6 2310,-208.6" />
+</g>
+
+<g id="node11" class="node" data-table="parana_seal_forecast">
+<title>parana_seal_forecast</title>
+<polygon fill="white" stroke="none" points="2310,-856.8 2310,-1165.2 2936,-1165.2 2936,-856.8 2310,-856.8" />
+<polygon fill="#e5eaf0" stroke="none" points="2311,-1116.6 2311,-1164.2 2935,-1164.2 2935,-1116.6 2311,-1116.6" />
+<text text-anchor="start" x="2324" y="-1136" font-family="Arial" font-weight="bold" font-size="18.00">Parana_seal_forecast</text>
+<text text-anchor="start" x="2319" y="-1098.7" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="2395" y="-1098.7" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="2650" y="-1098.7" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2885" y="-1098.7" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="2319" y="-1067.4" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="2395" y="-1066.8" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="2650" y="-1067.1" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2885" y="-1067.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1034.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1034" font-family="Arial" font-size="14.00">score</text>
+<text text-anchor="start" x="2650" y="-1034.3" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="2885" y="-1034.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-1001.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1001.2" font-family="Arial" font-size="14.00">level</text>
+<text text-anchor="start" x="2650" y="-1001.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2885" y="-1001.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-969" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-968.4" font-family="Arial" font-size="14.00">valid_until</text>
+<text text-anchor="start" x="2650" y="-968.7" font-family="Arial" font-size="13.00">DATE</text>
+<text text-anchor="start" x="2885" y="-969" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-936.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-935.6" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="2650" y="-935.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-936.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-903.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-902.8" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="2650" y="-903.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-903.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-870.6" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="2395" y="-870" font-family="Arial" font-size="14.00">id_unit</text>
+<text text-anchor="start" x="2650" y="-870.3" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="2885" y="-870.6" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="2310,-856.8 2310,-1165.2 2936,-1165.2 2936,-856.8 2310,-856.8" />
+</g>
+
+<g id="node12" class="node" data-table="administrator">
+<title>administrator</title>
+<polygon fill="white" stroke="none" points="0,-655.6 0,-898.4 626,-898.4 626,-655.6 0,-655.6" />
+<polygon fill="#e5eaf0" stroke="none" points="1,-849.8 1,-897.4 625,-897.4 625,-849.8 1,-849.8" />
+<text text-anchor="start" x="14" y="-869.2" font-family="Arial" font-weight="bold" font-size="18.00">Administrator</text>
+<text text-anchor="start" x="9" y="-831.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="85" y="-831.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="340" y="-831.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="575" y="-831.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="9" y="-800.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="85" y="-800" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="340" y="-800.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="575" y="-800.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-767.8" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="85" y="-767.2" font-family="Arial" font-size="14.00">email</text>
+<text text-anchor="start" x="340" y="-767.5" font-family="Arial" font-size="13.00">VARCHAR(255)</text>
+<text text-anchor="start" x="575" y="-767.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-735" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-734.4" font-family="Arial" font-size="14.00">password_hash</text>
+<text text-anchor="start" x="340" y="-734.7" font-family="Arial" font-size="13.00">VARCHAR(255)</text>
+<text text-anchor="start" x="575" y="-735" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="9" y="-702.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-701.6" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="340" y="-701.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="575" y="-702.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="9" y="-669.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="85" y="-668.8" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="340" y="-669.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="575" y="-669.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="0,-655.6 0,-898.4 626,-898.4 626,-655.6 0,-655.6" />
+</g>
+
+<g id="node13" class="node" data-table="storage_file">
+<title>storage_file</title>
+<polygon fill="white" stroke="none" points="2310,-1230.6 2310,-1473.4 2936,-1473.4 2936,-1230.6 2310,-1230.6" />
+<polygon fill="#e5eaf0" stroke="none" points="2311,-1424.8 2311,-1472.4 2935,-1472.4 2935,-1424.8 2311,-1424.8" />
+<text text-anchor="start" x="2324" y="-1444.2" font-family="Arial" font-weight="bold" font-size="18.00">Storage_file</text>
+<text text-anchor="start" x="2319" y="-1406.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="2395" y="-1406.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="2650" y="-1406.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="2885" y="-1406.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="2319" y="-1375.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="2395" y="-1375" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="2650" y="-1375.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="2885" y="-1375.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1342.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1342.2" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="2650" y="-1342.5" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="2885" y="-1342.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1310" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1309.4" font-family="Arial" font-size="14.00">path</text>
+<text text-anchor="start" x="2650" y="-1309.7" font-family="Arial" font-size="13.00">VARCHAR(255)</text>
+<text text-anchor="start" x="2885" y="-1310" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="2319" y="-1277.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1276.6" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="2650" y="-1276.9" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-1277.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="2319" y="-1244.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="2395" y="-1243.8" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="2650" y="-1244.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="2885" y="-1244.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="2310,-1230.6 2310,-1473.4 2936,-1473.4 2936,-1230.6 2310,-1230.6" />
+</g>
+
+<g id="node14" class="node" data-table="employee">
+<title>employee</title>
+<polygon fill="white" stroke="none" points="3080,-604.8 3080,-1077.2 3706,-1077.2 3706,-604.8 3080,-604.8" />
+<polygon fill="#e5eaf0" stroke="none" points="3081,-1028.6 3081,-1076.2 3705,-1076.2 3705,-1028.6 3081,-1028.6" />
+<text text-anchor="start" x="3094" y="-1048" font-family="Arial" font-weight="bold" font-size="18.00">Employee</text>
+<text text-anchor="start" x="3089" y="-1010.7" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="3165" y="-1010.7" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="3420" y="-1010.7" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="3655" y="-1010.7" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="3089" y="-979.4" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="3165" y="-978.8" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="3420" y="-979.1" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="3655" y="-979.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-946.6" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="3165" y="-946" font-family="Arial" font-size="14.00">cpf</text>
+<text text-anchor="start" x="3420" y="-946.3" font-family="Arial" font-size="13.00">CHAR(11)</text>
+<text text-anchor="start" x="3655" y="-946.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-913.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-913.2" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="3420" y="-913.5" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="3655" y="-913.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-881" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="3165" y="-880.4" font-family="Arial" font-size="14.00">email</text>
+<text text-anchor="start" x="3420" y="-880.7" font-family="Arial" font-size="13.00">VARCHAR(255)</text>
+<text text-anchor="start" x="3655" y="-881" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-848.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-847.6" font-family="Arial" font-size="14.00">phone</text>
+<text text-anchor="start" x="3420" y="-847.9" font-family="Arial" font-size="13.00">VARCHAR(20)</text>
+<text text-anchor="start" x="3655" y="-848.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-815.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-814.8" font-family="Arial" font-size="14.00">password_hash</text>
+<text text-anchor="start" x="3420" y="-815.1" font-family="Arial" font-size="13.00">VARCHAR(255)</text>
+<text text-anchor="start" x="3655" y="-815.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-782.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-782" font-family="Arial" font-size="14.00">employee_status</text>
+<text text-anchor="start" x="3420" y="-782.3" font-family="Arial" font-size="13.00">EMPLOYEE_STATUS</text>
+<text text-anchor="start" x="3655" y="-782.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-749.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-749.2" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="3420" y="-749.5" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="3655" y="-749.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-717" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-716.4" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="3420" y="-716.7" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="3655" y="-717" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-684.2" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3165" y="-683.6" font-family="Arial" font-size="14.00">id_storage_file</text>
+<text text-anchor="start" x="3420" y="-683.9" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="3655" y="-684.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-651.4" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3165" y="-650.8" font-family="Arial" font-size="14.00">id_department</text>
+<text text-anchor="start" x="3420" y="-651.1" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="3655" y="-651.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-618.6" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3165" y="-618" font-family="Arial" font-size="14.00">id_permission_group</text>
+<text text-anchor="start" x="3420" y="-618.3" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="3655" y="-618.6" font-family="Arial" font-size="12.00">NO</text>
+<polygon fill="none" stroke="#222222" points="3080,-604.8 3080,-1077.2 3706,-1077.2 3706,-604.8 3080,-604.8" />
+</g>
+
+<g id="node15" class="node" data-table="scope">
+<title>scope</title>
+<polygon fill="white" stroke="none" points="3850,-1889.8 3850,-2034.2 4476,-2034.2 4476,-1889.8 3850,-1889.8" />
+<polygon fill="#e5eaf0" stroke="none" points="3851,-1985.6 3851,-2033.2 4475,-2033.2 4475,-1985.6 3851,-1985.6" />
+<text text-anchor="start" x="3864" y="-2005" font-family="Arial" font-weight="bold" font-size="18.00">Scope</text>
+<text text-anchor="start" x="3859" y="-1967.7" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="3935" y="-1967.7" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="4190" y="-1967.7" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="4425" y="-1967.7" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="3859" y="-1936.4" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="3935" y="-1935.8" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="4190" y="-1936.1" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="4425" y="-1936.4" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1903.6" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="3935" y="-1903" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="4190" y="-1903.3" font-family="Arial" font-size="13.00">VARCHAR(100)</text>
+<text text-anchor="start" x="4425" y="-1903.6" font-family="Arial" font-size="12.00">NO</text>
+<polygon fill="none" stroke="#222222" points="3850,-1889.8 3850,-2034.2 4476,-2034.2 4476,-1889.8 3850,-1889.8" />
+</g>
+
+<g id="node16" class="node" data-table="category">
+<title>category</title>
+<polygon fill="white" stroke="none" points="3850,-1647.4 3850,-1824.6 4476,-1824.6 4476,-1647.4 3850,-1647.4" />
+<polygon fill="#e5eaf0" stroke="none" points="3851,-1776 3851,-1823.6 4475,-1823.6 4475,-1776 3851,-1776" />
+<text text-anchor="start" x="3864" y="-1795.4" font-family="Arial" font-weight="bold" font-size="18.00">Category</text>
+<text text-anchor="start" x="3859" y="-1758.1" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="3935" y="-1758.1" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="4190" y="-1758.1" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="4425" y="-1758.1" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="3859" y="-1726.8" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="3935" y="-1726.2" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="4190" y="-1726.5" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="4425" y="-1726.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1694" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="3935" y="-1693.4" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="4190" y="-1693.7" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="4425" y="-1694" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1661.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1660.6" font-family="Arial" font-size="14.00">classification</text>
+<text text-anchor="start" x="4190" y="-1660.9" font-family="Arial" font-size="13.00">CATEGORY_CLASSIFICATION</text>
+<text text-anchor="start" x="4425" y="-1661.2" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="3850,-1647.4 3850,-1824.6 4476,-1824.6 4476,-1647.4 3850,-1647.4" />
+</g>
+
+<g id="node17" class="node" data-table="gas">
+<title>gas</title>
+<polygon fill="white" stroke="none" points="3850,-2099.6 3850,-2342.4 4476,-2342.4 4476,-2099.6 3850,-2099.6" />
+<polygon fill="#e5eaf0" stroke="none" points="3851,-2293.8 3851,-2341.4 4475,-2341.4 4475,-2293.8 3851,-2293.8" />
+<text text-anchor="start" x="3864" y="-2313.2" font-family="Arial" font-weight="bold" font-size="18.00">Gas</text>
+<text text-anchor="start" x="3859" y="-2275.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="3935" y="-2275.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="4190" y="-2275.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="4425" y="-2275.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="3859" y="-2244.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="3935" y="-2244" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="4190" y="-2244.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="4425" y="-2244.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-2211.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-2211.2" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="4190" y="-2211.5" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="4425" y="-2211.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-2179" font-family="Arial" font-size="12.00">UQ</text>
+<text text-anchor="start" x="3935" y="-2178.4" font-family="Arial" font-size="14.00">formula</text>
+<text text-anchor="start" x="4190" y="-2178.7" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="4425" y="-2179" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-2146.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-2145.6" font-family="Arial" font-size="14.00">is_biogenic</text>
+<text text-anchor="start" x="4190" y="-2145.9" font-family="Arial" font-size="13.00">BOOLEAN</text>
+<text text-anchor="start" x="4425" y="-2146.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-2113.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-2112.8" font-family="Arial" font-size="14.00">gwp</text>
+<text text-anchor="start" x="4190" y="-2113.1" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="4425" y="-2113.4" font-family="Arial" font-size="12.00">NO</text>
+<polygon fill="none" stroke="#222222" points="3850,-2099.6 3850,-2342.4 4476,-2342.4 4476,-2099.6 3850,-2099.6" />
+</g>
+
+<g id="node18" class="node" data-table="inventory">
+<title>inventory</title>
+<polygon fill="white" stroke="none" points="3850,-1011.6 3850,-1582.4 4476,-1582.4 4476,-1011.6 3850,-1011.6" />
+<polygon fill="#e5eaf0" stroke="none" points="3851,-1533.8 3851,-1581.4 4475,-1581.4 4475,-1533.8 3851,-1533.8" />
+<text text-anchor="start" x="3864" y="-1553.2" font-family="Arial" font-weight="bold" font-size="18.00">Inventory</text>
+<text text-anchor="start" x="3859" y="-1515.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="3935" y="-1515.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="4190" y="-1515.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="4425" y="-1515.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="3859" y="-1484.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="3935" y="-1484" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="4190" y="-1484.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="4425" y="-1484.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1451.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1451.2" font-family="Arial" font-size="14.00">name</text>
+<text text-anchor="start" x="4190" y="-1451.5" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="4425" y="-1451.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1419" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1418.4" font-family="Arial" font-size="14.00">description</text>
+<text text-anchor="start" x="4190" y="-1418.7" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="4425" y="-1419" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1386.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1385.6" font-family="Arial" font-size="14.00">consolidation_approach</text>
+<text text-anchor="start" x="4190" y="-1385.9" font-family="Arial" font-size="13.00">VARCHAR(100)</text>
+<text text-anchor="start" x="4425" y="-1386.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1353.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1352.8" font-family="Arial" font-size="14.00">inventorying_period_start</text>
+<text text-anchor="start" x="4190" y="-1353.1" font-family="Arial" font-size="13.00">DATE</text>
+<text text-anchor="start" x="4425" y="-1353.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1320.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1320" font-family="Arial" font-size="14.00">inventorying_period_end</text>
+<text text-anchor="start" x="4190" y="-1320.3" font-family="Arial" font-size="13.00">DATE</text>
+<text text-anchor="start" x="4425" y="-1320.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1287.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1287.2" font-family="Arial" font-size="14.00">status</text>
+<text text-anchor="start" x="4190" y="-1287.5" font-family="Arial" font-size="13.00">INVENTORY_STATUS</text>
+<text text-anchor="start" x="4425" y="-1287.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1255" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1254.4" font-family="Arial" font-size="14.00">status_message</text>
+<text text-anchor="start" x="4190" y="-1254.7" font-family="Arial" font-size="13.00">VARCHAR(100)</text>
+<text text-anchor="start" x="4425" y="-1255" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1222.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1221.6" font-family="Arial" font-size="14.00">type</text>
+<text text-anchor="start" x="4190" y="-1221.9" font-family="Arial" font-size="13.00">INVENTORY_TYPE</text>
+<text text-anchor="start" x="4425" y="-1222.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3859" y="-1189.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1188.8" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="4190" y="-1189.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="4425" y="-1189.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1156.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3935" y="-1156" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="4190" y="-1156.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="4425" y="-1156.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1123.8" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3935" y="-1123.2" font-family="Arial" font-size="14.00">id_department</text>
+<text text-anchor="start" x="4190" y="-1123.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="4425" y="-1123.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1091" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3935" y="-1090.4" font-family="Arial" font-size="14.00">id_storage_file</text>
+<text text-anchor="start" x="4190" y="-1090.7" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="4425" y="-1091" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1058.2" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3935" y="-1057.6" font-family="Arial" font-size="14.00">id_owner_employee</text>
+<text text-anchor="start" x="4190" y="-1057.9" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="4425" y="-1058.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3859" y="-1025.4" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3935" y="-1024.8" font-family="Arial" font-size="14.00">id_validator_employee</text>
+<text text-anchor="start" x="4190" y="-1025.1" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="4425" y="-1025.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="3850,-1011.6 3850,-1582.4 4476,-1582.4 4476,-1011.6 3850,-1011.6" />
+</g>
+
+<g id="node19" class="node" data-table="emission">
+<title>emission</title>
+<polygon fill="white" stroke="none" points="4620,-1836.6 4620,-2243.4 5246,-2243.4 5246,-1836.6 4620,-1836.6" />
+<polygon fill="#e5eaf0" stroke="none" points="4621,-2194.8 4621,-2242.4 5245,-2242.4 5245,-2194.8 4621,-2194.8" />
+<text text-anchor="start" x="4634" y="-2214.2" font-family="Arial" font-weight="bold" font-size="18.00">Emission</text>
+<text text-anchor="start" x="4629" y="-2176.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="4705" y="-2176.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="4960" y="-2176.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="5195" y="-2176.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="4629" y="-2145.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="4705" y="-2145" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="4960" y="-2145.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="5195" y="-2145.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="4629" y="-2112.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-2112.2" font-family="Arial" font-size="14.00">quantity_co2e</text>
+<text text-anchor="start" x="4960" y="-2112.5" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="5195" y="-2112.8" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="4629" y="-2080" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-2079.4" font-family="Arial" font-size="14.00">methodology_description</text>
+<text text-anchor="start" x="4960" y="-2079.7" font-family="Arial" font-size="13.00">VARCHAR(150)</text>
+<text text-anchor="start" x="5195" y="-2080" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-2047.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-2046.6" font-family="Arial" font-size="14.00">supplier_data_percentage</text>
+<text text-anchor="start" x="4960" y="-2046.9" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="5195" y="-2047.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-2014.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-2013.8" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="4960" y="-2014.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="5195" y="-2014.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1981.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-1981" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="4960" y="-1981.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="5195" y="-1981.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1948.8" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="4705" y="-1948.2" font-family="Arial" font-size="14.00">id_gas</text>
+<text text-anchor="start" x="4960" y="-1948.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="5195" y="-1948.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1916" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="4705" y="-1915.4" font-family="Arial" font-size="14.00">id_scope</text>
+<text text-anchor="start" x="4960" y="-1915.7" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="5195" y="-1916" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1883.2" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="4705" y="-1882.6" font-family="Arial" font-size="14.00">id_category</text>
+<text text-anchor="start" x="4960" y="-1882.9" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="5195" y="-1883.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1850.4" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="4705" y="-1849.8" font-family="Arial" font-size="14.00">id_inventory</text>
+<text text-anchor="start" x="4960" y="-1850.1" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="5195" y="-1850.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="4620,-1836.6 4620,-2243.4 5246,-2243.4 5246,-1836.6 4620,-1836.6" />
+</g>
+
+<g id="node20" class="node" data-table="reduction">
+<title>reduction</title>
+<polygon fill="white" stroke="none" points="4620,-1476.2 4620,-1751.8 5246,-1751.8 5246,-1476.2 4620,-1476.2" />
+<polygon fill="#e5eaf0" stroke="none" points="4621,-1703.2 4621,-1750.8 5245,-1750.8 5245,-1703.2 4621,-1703.2" />
+<text text-anchor="start" x="4634" y="-1722.6" font-family="Arial" font-weight="bold" font-size="18.00">Reduction</text>
+<text text-anchor="start" x="4629" y="-1685.3" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="4705" y="-1685.3" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="4960" y="-1685.3" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="5195" y="-1685.3" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="4629" y="-1654" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="4705" y="-1653.4" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="4960" y="-1653.7" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="5195" y="-1654" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="4629" y="-1621.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-1620.6" font-family="Arial" font-size="14.00">quantity_co2e</text>
+<text text-anchor="start" x="4960" y="-1620.9" font-family="Arial" font-size="13.00">NUMERIC</text>
+<text text-anchor="start" x="5195" y="-1621.2" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="4629" y="-1588.4" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-1587.8" font-family="Arial" font-size="14.00">created_at</text>
+<text text-anchor="start" x="4960" y="-1588.1" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="5195" y="-1588.4" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1555.6" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="4705" y="-1555" font-family="Arial" font-size="14.00">updated_at</text>
+<text text-anchor="start" x="4960" y="-1555.3" font-family="Arial" font-size="13.00">TIMESTAMP</text>
+<text text-anchor="start" x="5195" y="-1555.6" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1522.8" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="4705" y="-1522.2" font-family="Arial" font-size="14.00">id_inventory</text>
+<text text-anchor="start" x="4960" y="-1522.5" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="5195" y="-1522.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="4629" y="-1490" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="4705" y="-1489.4" font-family="Arial" font-size="14.00">id_category</text>
+<text text-anchor="start" x="4960" y="-1489.7" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="5195" y="-1490" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="4620,-1476.2 4620,-1751.8 5246,-1751.8 5246,-1476.2 4620,-1476.2" />
+</g>
+
+<g id="node21" class="node" data-table="reported_problem">
+<title>reported_problem</title>
+<polygon fill="white" stroke="none" points="3080,-1403.6 3080,-1646.4 3706,-1646.4 3706,-1403.6 3080,-1403.6" />
+<polygon fill="#e5eaf0" stroke="none" points="3081,-1597.8 3081,-1645.4 3705,-1645.4 3705,-1597.8 3081,-1597.8" />
+<text text-anchor="start" x="3094" y="-1617.2" font-family="Arial" font-weight="bold" font-size="18.00">Reported_problem</text>
+<text text-anchor="start" x="3089" y="-1579.9" font-family="Arial" font-size="11.00">KEY</text>
+<text text-anchor="start" x="3165" y="-1579.9" font-family="Arial" font-size="11.00">COLUMN</text>
+<text text-anchor="start" x="3420" y="-1579.9" font-family="Arial" font-size="11.00">TYPE</text>
+<text text-anchor="start" x="3655" y="-1579.9" font-family="Arial" font-size="11.00">NULL</text>
+<text text-anchor="start" x="3089" y="-1548.6" font-family="Arial" font-size="12.00">PK</text>
+<text text-anchor="start" x="3165" y="-1548" font-family="Arial" font-size="14.00">id</text>
+<text text-anchor="start" x="3420" y="-1548.3" font-family="Arial" font-size="13.00">SERIAL</text>
+<text text-anchor="start" x="3655" y="-1548.6" font-family="Arial" font-size="12.00">NO</text>
+<text text-anchor="start" x="3089" y="-1515.8" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-1515.2" font-family="Arial" font-size="14.00">category</text>
+<text text-anchor="start" x="3420" y="-1515.5" font-family="Arial" font-size="13.00">PROBLEM_CATEGORY</text>
+<text text-anchor="start" x="3655" y="-1515.8" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-1483" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-1482.4" font-family="Arial" font-size="14.00">description</text>
+<text text-anchor="start" x="3420" y="-1482.7" font-family="Arial" font-size="13.00">VARCHAR(500)</text>
+<text text-anchor="start" x="3655" y="-1483" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-1450.2" font-family="Arial" font-size="12.00"> </text>
+<text text-anchor="start" x="3165" y="-1449.6" font-family="Arial" font-size="14.00">screen</text>
+<text text-anchor="start" x="3420" y="-1449.9" font-family="Arial" font-size="13.00">VARCHAR(50)</text>
+<text text-anchor="start" x="3655" y="-1450.2" font-family="Arial" font-size="12.00">YES</text>
+<text text-anchor="start" x="3089" y="-1417.4" font-family="Arial" font-size="12.00">FK</text>
+<text text-anchor="start" x="3165" y="-1416.8" font-family="Arial" font-size="14.00">id_storage_file</text>
+<text text-anchor="start" x="3420" y="-1417.1" font-family="Arial" font-size="13.00">INTEGER</text>
+<text text-anchor="start" x="3655" y="-1417.4" font-family="Arial" font-size="12.00">YES</text>
+<polygon fill="none" stroke="#222222" points="3080,-1403.6 3080,-1646.4 3706,-1646.4 3706,-1403.6 3080,-1403.6" />
+</g>
+</g>
+</svg></div></main><dialog id="details"><div class="dialog-top"><h2 id="detail-title"></h2><button id="close">Fechar</button></div><div id="detail-body"></div></dialog><script>
+const DATA={"tables": {"plan": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(50)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "name VARCHAR(50) NOT NULL UNIQUE"}, {"name": "description", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "description VARCHAR(150)"}, {"name": "price", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "price NUMERIC NOT NULL CHECK (price >= 0)"}, {"name": "duration_days", "type": "INTEGER", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "duration_days INTEGER NOT NULL CHECK (duration_days > 0)"}, {"name": "is_active", "type": "BOOLEAN", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "is_active BOOLEAN NOT NULL DEFAULT true"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}], "address": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "zip_code", "type": "CHAR(8)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "zip_code CHAR(8)"}, {"name": "state", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "state VARCHAR(150) NOT NULL"}, {"name": "city", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "city VARCHAR(150) NOT NULL"}, {"name": "neighborhood", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "neighborhood VARCHAR(150) NOT NULL"}, {"name": "street", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "street VARCHAR(150) NOT NULL"}, {"name": "number", "type": "INTEGER", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "number INTEGER NOT NULL"}, {"name": "complement", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "complement VARCHAR(150)"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}], "enterprise": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "trade_name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "trade_name VARCHAR(150)"}, {"name": "cnpj", "type": "CHAR(14)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "cnpj CHAR(14) NOT NULL UNIQUE"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_address", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_address INTEGER", "reference": "address.id"}], "plan_subscription": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "is_active", "type": "BOOLEAN", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "is_active BOOLEAN NOT NULL DEFAULT true"}, {"name": "installments", "type": "INTEGER", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "installments INTEGER NOT NULL CHECK (installments >= 0)"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "deactivated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "deactivated_at TIMESTAMP"}, {"name": "id_plan", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_plan INTEGER", "reference": "plan.id"}, {"name": "id_enterprise", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_enterprise INTEGER", "reference": "enterprise.id"}], "payment": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "value", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "value NUMERIC NOT NULL CHECK (value > 0)"}, {"name": "term", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "term TIMESTAMP"}, {"name": "status", "type": "PAYMENT_STATUS", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "status PAYMENT_STATUS NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "additional_use_value", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "additional_use_value NUMERIC CHECK (additional_use_value >= 0)"}, {"name": "due_date", "type": "DATE", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "due_date DATE NOT NULL"}, {"name": "id_plan_subscription", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_plan_subscription INTEGER", "reference": "plan_subscription.id"}], "unit": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "cnae", "type": "CHAR(7)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "cnae CHAR(7)"}, {"name": "cnpj", "type": "CHAR(14)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "cnpj CHAR(14) NOT NULL UNIQUE"}, {"name": "is_active", "type": "BOOLEAN", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "is_active BOOLEAN NOT NULL DEFAULT true"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_enterprise", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_enterprise INTEGER", "reference": "enterprise.id"}, {"name": "id_address", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_address INTEGER", "reference": "address.id"}], "department": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "description", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "description VARCHAR(150)"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_unit", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_unit INTEGER", "reference": "unit.id"}], "permission_group": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "description", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "description VARCHAR(150) NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "id_enterprise", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_enterprise INTEGER", "reference": "enterprise.id"}], "permission": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "description", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "description VARCHAR(150)"}, {"name": "pattern", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "pattern VARCHAR(150) NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}], "permission_group_permission": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_permission", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": true, "required": false, "sql": "id_permission INTEGER", "reference": "permission.id"}, {"name": "id_permission_group", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": true, "required": false, "sql": "id_permission_group INTEGER", "reference": "permission_group.id"}], "parana_seal_forecast": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "score", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "score NUMERIC CHECK (score >= 0)"}, {"name": "level", "type": "INTEGER", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "level INTEGER CHECK (level >= 0)"}, {"name": "valid_until", "type": "DATE", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "valid_until DATE"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_unit", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_unit INTEGER", "reference": "unit.id"}], "administrator": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "email", "type": "VARCHAR(255)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "email VARCHAR(255) NOT NULL UNIQUE"}, {"name": "password_hash", "type": "VARCHAR(255)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "password_hash VARCHAR(255) NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}], "storage_file": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "path", "type": "VARCHAR(255)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "path VARCHAR(255) NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}], "employee": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "cpf", "type": "CHAR(11)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "cpf CHAR(11) NOT NULL UNIQUE"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "email", "type": "VARCHAR(255)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "email VARCHAR(255) NOT NULL UNIQUE"}, {"name": "phone", "type": "VARCHAR(20)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "phone VARCHAR(20)"}, {"name": "password_hash", "type": "VARCHAR(255)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "password_hash VARCHAR(255) NOT NULL"}, {"name": "employee_status", "type": "EMPLOYEE_STATUS", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "employee_status EMPLOYEE_STATUS NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_storage_file", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_storage_file INTEGER", "reference": "storage_file.id"}, {"name": "id_department", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": true, "sql": "id_department INTEGER NOT NULL", "reference": "department.id"}, {"name": "id_permission_group", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": true, "sql": "id_permission_group INTEGER NOT NULL", "reference": "permission_group.id"}], "scope": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(100)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "name VARCHAR(100) NOT NULL UNIQUE"}], "category": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL UNIQUE"}, {"name": "classification", "type": "CATEGORY_CLASSIFICATION", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "classification CATEGORY_CLASSIFICATION"}], "gas": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "formula", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": true, "composite": false, "required": true, "sql": "formula VARCHAR(150) NOT NULL UNIQUE"}, {"name": "is_biogenic", "type": "BOOLEAN", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "is_biogenic BOOLEAN NOT NULL"}, {"name": "gwp", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "gwp NUMERIC NOT NULL CHECK (gwp > 0)"}], "inventory": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "name", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "name VARCHAR(150) NOT NULL"}, {"name": "description", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "description VARCHAR(150)"}, {"name": "consolidation_approach", "type": "VARCHAR(100)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "consolidation_approach VARCHAR(100)"}, {"name": "inventorying_period_start", "type": "DATE", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "inventorying_period_start DATE"}, {"name": "inventorying_period_end", "type": "DATE", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "inventorying_period_end DATE CHECK (inventorying_period_end >= inventorying_period_start)"}, {"name": "status", "type": "INVENTORY_STATUS", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "status INVENTORY_STATUS NOT NULL"}, {"name": "status_message", "type": "VARCHAR(100)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "status_message VARCHAR(100)"}, {"name": "type", "type": "INVENTORY_TYPE", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "type INVENTORY_TYPE NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_department", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_department INTEGER", "reference": "department.id"}, {"name": "id_storage_file", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_storage_file INTEGER", "reference": "storage_file.id"}, {"name": "id_owner_employee", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_owner_employee INTEGER", "reference": "employee.id"}, {"name": "id_validator_employee", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_validator_employee INTEGER", "reference": "employee.id"}], "emission": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "quantity_co2e", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "quantity_co2e NUMERIC NOT NULL CHECK (quantity_co2e >= 0)"}, {"name": "methodology_description", "type": "VARCHAR(150)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "methodology_description VARCHAR(150)"}, {"name": "supplier_data_percentage", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "supplier_data_percentage NUMERIC CHECK (supplier_data_percentage BETWEEN 0 AND 100)"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_gas", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_gas INTEGER", "reference": "gas.id"}, {"name": "id_scope", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_scope INTEGER", "reference": "scope.id"}, {"name": "id_category", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_category INTEGER", "reference": "category.id"}, {"name": "id_inventory", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_inventory INTEGER", "reference": "inventory.id"}], "reduction": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "quantity_co2e", "type": "NUMERIC", "pk": false, "fk": false, "unique": false, "composite": false, "required": true, "sql": "quantity_co2e NUMERIC NOT NULL"}, {"name": "created_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "created_at TIMESTAMP DEFAULT current_timestamp"}, {"name": "updated_at", "type": "TIMESTAMP", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "updated_at TIMESTAMP"}, {"name": "id_inventory", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_inventory INTEGER", "reference": "inventory.id"}, {"name": "id_category", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_category INTEGER", "reference": "category.id"}], "reported_problem": [{"name": "id", "type": "SERIAL", "pk": true, "fk": false, "unique": false, "composite": false, "required": true, "sql": "id SERIAL"}, {"name": "category", "type": "PROBLEM_CATEGORY", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "category PROBLEM_CATEGORY"}, {"name": "description", "type": "VARCHAR(500)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "description VARCHAR(500)"}, {"name": "screen", "type": "VARCHAR(50)", "pk": false, "fk": false, "unique": false, "composite": false, "required": false, "sql": "screen VARCHAR(50)"}, {"name": "id_storage_file", "type": "INTEGER", "pk": false, "fk": true, "unique": false, "composite": false, "required": false, "sql": "id_storage_file INTEGER", "reference": "storage_file.id"}]}, "ddl": {"plan": "CREATE TABLE plan (\n    id SERIAL,\n    name VARCHAR(50) NOT NULL UNIQUE,\n    description VARCHAR(150),\n    price NUMERIC NOT NULL CHECK (price >= 0),\n    duration_days INTEGER NOT NULL CHECK (duration_days > 0),\n    is_active BOOLEAN NOT NULL DEFAULT true,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    CONSTRAINT pk_plan PRIMARY KEY (id)\n);\n\n", "address": "CREATE TABLE address (\n    id SERIAL,\n    zip_code CHAR(8),\n\tstate VARCHAR(150) NOT NULL,\n\tcity VARCHAR(150) NOT NULL,\n\tneighborhood VARCHAR(150) NOT NULL,\n\tstreet VARCHAR(150) NOT NULL,\n    number INTEGER NOT NULL,\n    complement VARCHAR(150),\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    CONSTRAINT pk_address PRIMARY KEY (id)\n);\n\n", "enterprise": "CREATE TABLE enterprise (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL,\n    trade_name VARCHAR(150),\n    cnpj CHAR(14) NOT NULL UNIQUE,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_address INTEGER,\n    CONSTRAINT pk_enterprise PRIMARY KEY (id)\n);\n\nALTER TABLE enterprise\n    ADD CONSTRAINT fk_enterprise_address\n    FOREIGN KEY (id_address) REFERENCES address (id);", "plan_subscription": "CREATE TABLE plan_subscription (\n    id SERIAL,\n    is_active BOOLEAN NOT NULL DEFAULT true,\n    installments INTEGER NOT NULL CHECK (installments >= 0),\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    deactivated_at TIMESTAMP,\n    id_plan INTEGER,\n    id_enterprise INTEGER,\n    CONSTRAINT pk_plan_subscription PRIMARY KEY (id)\n);\n\nALTER TABLE plan_subscription\n    ADD CONSTRAINT fk_plan_subscription_plan\n    FOREIGN KEY (id_plan) REFERENCES plan (id)\n    ON DELETE CASCADE;\n\nALTER TABLE plan_subscription\n    ADD CONSTRAINT fk_plan_subscription_enterprise\n    FOREIGN KEY (id_enterprise) REFERENCES enterprise (id);", "payment": "CREATE TABLE payment (\n    id SERIAL,\n    value NUMERIC NOT NULL CHECK (value > 0),\n    term TIMESTAMP,\n    status PAYMENT_STATUS NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    additional_use_value NUMERIC CHECK (additional_use_value >= 0),\n    due_date DATE NOT NULL,\n    id_plan_subscription INTEGER,\n    CONSTRAINT pk_payment PRIMARY KEY (id)\n);\n\nALTER TABLE payment\n    ADD CONSTRAINT fk_payment_plan_subscription\n    FOREIGN KEY (id_plan_subscription) REFERENCES plan_subscription (id)\n    ON DELETE RESTRICT;", "unit": "CREATE TABLE unit (\n    id SERIAL,\n    cnae CHAR(7),\n    cnpj CHAR(14) NOT NULL UNIQUE,\n    is_active BOOLEAN NOT NULL DEFAULT true,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_enterprise INTEGER,\n    id_address INTEGER,\n    CONSTRAINT pk_unit PRIMARY KEY (id)\n);\n\nALTER TABLE unit\n    ADD CONSTRAINT fk_unit_enterprise\n    FOREIGN KEY (id_enterprise) REFERENCES enterprise (id);\n\nALTER TABLE unit\n    ADD CONSTRAINT fk_unit_address\n    FOREIGN KEY (id_address) REFERENCES address (id);", "department": "CREATE TABLE department (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL,\n    description VARCHAR(150),\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_unit INTEGER,\n    CONSTRAINT pk_department PRIMARY KEY (id)\n);\n\nALTER TABLE department\n    ADD CONSTRAINT fk_department_unit\n    FOREIGN KEY (id_unit) REFERENCES unit (id)\n    ON DELETE RESTRICT;", "permission_group": "CREATE TABLE permission_group (\n    id SERIAL,\n    description VARCHAR(150) NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    id_enterprise INTEGER,\n    CONSTRAINT pk_permission_group PRIMARY KEY (id)\n);\n\nALTER TABLE permission_group\n    ADD CONSTRAINT fk_permission_group_enterprise\n    FOREIGN KEY (id_enterprise) REFERENCES enterprise (id);", "permission": "CREATE TABLE permission (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL,\n    description VARCHAR(150),\n    pattern VARCHAR(150) NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    CONSTRAINT pk_permission PRIMARY KEY (id),\n    CONSTRAINT uq_permission_pattern UNIQUE (pattern),\n    CONSTRAINT ck_permission_pattern_not_empty CHECK (btrim(pattern) <> '')\n);\n\n", "permission_group_permission": "CREATE TABLE permission_group_permission (\n    id SERIAL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_permission INTEGER,\n    id_permission_group INTEGER,\n    CONSTRAINT pk_permission_group_permission PRIMARY KEY (id),\n    CONSTRAINT uq_permission_group_permission UNIQUE (id_permission, id_permission_group)\n);\n\nALTER TABLE permission_group_permission\n    ADD CONSTRAINT fk_permission_group_permission_permission\n    FOREIGN KEY (id_permission) REFERENCES permission (id);\n\nALTER TABLE permission_group_permission\n    ADD CONSTRAINT fk_permission_group_permission_permission_group\n    FOREIGN KEY (id_permission_group) REFERENCES permission_group (id);", "parana_seal_forecast": "CREATE TABLE parana_seal_forecast (\n    id SERIAL,\n    score NUMERIC CHECK (score >= 0),\n    level INTEGER CHECK (level >= 0),\n    valid_until DATE,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_unit INTEGER,\n    CONSTRAINT pk_parana_seal_forecast PRIMARY KEY (id)\n);\n\nALTER TABLE parana_seal_forecast\n    ADD CONSTRAINT fk_parana_seal_forecast_unit\n    FOREIGN KEY (id_unit) REFERENCES unit (id)\n    ON DELETE CASCADE;", "administrator": "CREATE TABLE administrator (\n    id SERIAL,\n    email VARCHAR(255) NOT NULL UNIQUE,\n    password_hash VARCHAR(255) NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    CONSTRAINT pk_administrator PRIMARY KEY (id)\n);\n\n", "storage_file": "CREATE TABLE storage_file (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL,\n    path VARCHAR(255) NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    CONSTRAINT pk_storage_file PRIMARY KEY (id)\n);\n\n", "employee": "CREATE TABLE employee (\n    id SERIAL,\n\tcpf CHAR(11) NOT NULL UNIQUE,\n    name VARCHAR(150) NOT NULL,\n    email VARCHAR(255) NOT NULL UNIQUE,\n    phone VARCHAR(20),\n    password_hash VARCHAR(255) NOT NULL,\n\temployee_status EMPLOYEE_STATUS NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_storage_file INTEGER,\n    id_department INTEGER NOT NULL,\n    id_permission_group INTEGER NOT NULL,\n    CONSTRAINT pk_employee PRIMARY KEY (id)\n);\n\nALTER TABLE employee\n    ADD CONSTRAINT fk_employee_storage_file\n    FOREIGN KEY (id_storage_file) REFERENCES storage_file (id);\n\nALTER TABLE employee\n    ADD CONSTRAINT fk_employee_department\n    FOREIGN KEY (id_department) REFERENCES department (id);\n\nALTER TABLE employee\n    ADD CONSTRAINT fk_employee_permission_group\n    FOREIGN KEY (id_permission_group) REFERENCES permission_group (id)\n    ON DELETE RESTRICT;", "scope": "CREATE TABLE scope (\n    id SERIAL,\n    name VARCHAR(100) NOT NULL UNIQUE,\n    CONSTRAINT pk_scope PRIMARY KEY (id)\n);\n\n", "category": "CREATE TABLE category (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL UNIQUE,\n    classification CATEGORY_CLASSIFICATION,\n    CONSTRAINT pk_category PRIMARY KEY (id)\n);\n\n", "gas": "CREATE TABLE gas (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL,\n    formula VARCHAR(150) NOT NULL UNIQUE,\n    is_biogenic BOOLEAN NOT NULL,\n    gwp NUMERIC NOT NULL CHECK (gwp > 0),\n    CONSTRAINT pk_gas PRIMARY KEY (id)\n);\n\n", "inventory": "CREATE TABLE inventory (\n    id SERIAL,\n    name VARCHAR(150) NOT NULL,\n    description VARCHAR(150),\n    consolidation_approach VARCHAR(100),\n    inventorying_period_start DATE,\n    inventorying_period_end DATE CHECK (inventorying_period_end >= inventorying_period_start),\n    status INVENTORY_STATUS NOT NULL,\n    status_message VARCHAR(100),\n    type INVENTORY_TYPE NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_department INTEGER,\n    id_storage_file INTEGER,\n    id_owner_employee INTEGER,\n    id_validator_employee INTEGER,\n    CONSTRAINT pk_inventory PRIMARY KEY (id)\n);\n\nALTER TABLE inventory\n    ADD CONSTRAINT fk_inventory_department\n    FOREIGN KEY (id_department) REFERENCES department (id);\n\nALTER TABLE inventory\n    ADD CONSTRAINT fk_inventory_storage_file\n    FOREIGN KEY (id_storage_file) REFERENCES storage_file (id);\n\nALTER TABLE inventory\n    ADD CONSTRAINT fk_inventory_owner_employee\n    FOREIGN KEY (id_owner_employee) REFERENCES employee (id);\n\nALTER TABLE inventory\n    ADD CONSTRAINT fk_inventory_validator_employee\n    FOREIGN KEY (id_validator_employee) REFERENCES employee (id);", "emission": "CREATE TABLE emission (\n    id SERIAL,\n    quantity_co2e NUMERIC NOT NULL CHECK (quantity_co2e >= 0),\n    methodology_description VARCHAR(150),\n    supplier_data_percentage NUMERIC CHECK (supplier_data_percentage BETWEEN 0 AND 100),\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_gas INTEGER,\n    id_scope INTEGER,\n    id_category INTEGER,\n    id_inventory INTEGER,\n    CONSTRAINT pk_emission PRIMARY KEY (id)\n);\n\nALTER TABLE emission\n    ADD CONSTRAINT fk_emission_gas\n    FOREIGN KEY (id_gas) REFERENCES gas (id)\n    ON DELETE RESTRICT;\n\nALTER TABLE emission\n    ADD CONSTRAINT fk_emission_scope\n    FOREIGN KEY (id_scope) REFERENCES scope (id)\n    ON DELETE RESTRICT;\n\nALTER TABLE emission\n    ADD CONSTRAINT fk_emission_category\n    FOREIGN KEY (id_category) REFERENCES category (id)\n    ON DELETE RESTRICT;\n\nALTER TABLE emission\n    ADD CONSTRAINT fk_emission_inventory\n    FOREIGN KEY (id_inventory) REFERENCES inventory (id)\n    ON DELETE CASCADE;", "reduction": "CREATE TABLE reduction (\n    id SERIAL,\n    quantity_co2e NUMERIC NOT NULL,\n    created_at TIMESTAMP DEFAULT current_timestamp,\n    updated_at TIMESTAMP,\n    id_inventory INTEGER,\n    id_category INTEGER,\n    CONSTRAINT pk_reduction PRIMARY KEY (id)\n);\n\nALTER TABLE reduction\n    ADD CONSTRAINT fk_reduction_inventory\n    FOREIGN KEY (id_inventory) REFERENCES inventory (id)\n    ON DELETE CASCADE;\n\nALTER TABLE reduction\n    ADD CONSTRAINT fk_reduction_category\n    FOREIGN KEY (id_category) REFERENCES category (id)\n    ON DELETE RESTRICT;", "reported_problem": "CREATE TABLE reported_problem (\n    id SERIAL,\n    category PROBLEM_CATEGORY,\n    description VARCHAR(500),\n    screen VARCHAR(50),\n    id_storage_file INTEGER,\n    CONSTRAINT pk_reported_problem PRIMARY KEY (id)\n);\n\nALTER TABLE reported_problem\n    ADD CONSTRAINT fk_reported_problem_storage_file\n    FOREIGN KEY (id_storage_file) REFERENCES storage_file (id)\n    ON DELETE RESTRICT;"}, "enums": {"PAYMENT_STATUS": ["PAID", "CANCELLED", "WAITING"], "CATEGORY_CLASSIFICATION": ["DOWNSTREAM", "UPSTREAM"], "EMPLOYEE_STATUS": ["ACTIVE", "INACTIVE", "IN_VACATION"], "INVENTORY_STATUS": ["UNDER_REVIEW", "APPROVED", "REJECTED", "PROCESSING", "PROCESSING_FAILED", "REQUESTED", "ISSUED"], "INVENTORY_TYPE": ["INPUT", "OUTPUT"], "PROBLEM_CATEGORY": ["ERROR", "BUG", "LOGIN_AND_ACCOUNT", "INTERFACE_AND_NAVIGATION", "PERFORMANCE", "DATA_AND_INFORMATION", "PAYMENT", "PRIVACY", "OTHERS"]}};
+const svg=document.getElementById('model'),vp=document.getElementById('viewport'),dialog=document.getElementById('details');
+const W=svg.viewBox.baseVal.width,H=svg.viewBox.baseVal.height;let scale=1;
+function zoom(value,x=vp.clientWidth/2,y=vp.clientHeight/2){const px=(vp.scrollLeft+x)/scale,py=(vp.scrollTop+y)/scale;scale=Math.max(.05,Math.min(3,value));svg.style.width=W*scale+'px';svg.style.height=H*scale+'px';vp.scrollLeft=px*scale-x;vp.scrollTop=py*scale-y;document.getElementById('zoom').textContent=Math.round(scale*100)+'%';}
+document.getElementById('plus').onclick=()=>zoom(scale*1.2);document.getElementById('minus').onclick=()=>zoom(scale/1.2);document.getElementById('actual').onclick=()=>zoom(1);document.getElementById('fit').onclick=()=>{zoom(Math.min((vp.clientWidth-20)/W,(vp.clientHeight-20)/H));vp.scrollTop=0;vp.scrollLeft=0;};document.getElementById('print').onclick=()=>print();
+vp.addEventListener('wheel',ev=>{if(ev.ctrlKey||ev.metaKey){ev.preventDefault();const b=vp.getBoundingClientRect();zoom(scale*Math.exp(-ev.deltaY*.002),ev.clientX-b.left,ev.clientY-b.top);}},{passive:false});
+let drag=null;vp.addEventListener('pointerdown',ev=>{if(ev.pointerType!=='mouse'||ev.button!==0)return;drag={x:ev.clientX,y:ev.clientY,left:vp.scrollLeft,top:vp.scrollTop,moved:false};});vp.addEventListener('pointermove',ev=>{if(!drag)return;if(Math.hypot(ev.clientX-drag.x,ev.clientY-drag.y)>5){if(!drag.moved)vp.setPointerCapture(ev.pointerId);drag.moved=true;vp.classList.add('dragging');}vp.scrollLeft=drag.left+drag.x-ev.clientX;vp.scrollTop=drag.top+drag.y-ev.clientY;});let wasDrag=false;function end(){wasDrag=drag?.moved||false;drag=null;vp.classList.remove('dragging');}vp.addEventListener('pointerup',end);vp.addEventListener('pointercancel',end);
+vp.addEventListener('click',ev=>{if(wasDrag){wasDrag=false;return;}const node=ev.target.closest('.node');if(node)showTable(node.dataset.table);});
+vp.addEventListener('keydown',ev=>{if(ev.key==='+'||ev.key==='='){ev.preventDefault();zoom(scale*1.2);}if(ev.key==='-'){ev.preventDefault();zoom(scale/1.2);}});
+const edges=[...svg.querySelectorAll('.edge')];edges.forEach(edge=>{edge.addEventListener('pointerenter',()=>edge.classList.add('active'));edge.addEventListener('pointerleave',()=>edge.classList.remove('active'));});svg.querySelectorAll('.node').forEach(node=>{node.addEventListener('pointerenter',()=>edges.filter(edge=>edge.dataset.parent===node.dataset.table||edge.dataset.child===node.dataset.table).forEach(edge=>edge.classList.add('active')));node.addEventListener('pointerleave',()=>edges.forEach(edge=>edge.classList.remove('active')));});
+function esc(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function showTable(key){document.getElementById('detail-title').textContent=key;const rows=DATA.tables[key].map(c=>'<tr><td><code>'+esc(c.name)+'</code></td><td>'+esc(c.type)+'</td><td>'+esc(c.reference||'—')+'</td></tr>').join('');document.getElementById('detail-body').innerHTML='<table class="info-table"><thead><tr><th>Column</th><th>Type</th><th>References</th></tr></thead><tbody>'+rows+'</tbody></table><h3>DDL · defaults, checks, unique keys and delete rules</h3><pre>'+esc(DATA.ddl[key])+'</pre>';dialog.showModal();}
+document.getElementById('enums').onclick=()=>{document.getElementById('detail-title').textContent='Domínios ENUM';document.getElementById('detail-body').innerHTML=Object.entries(DATA.enums).map(([name,values])=>'<h3>'+esc(name)+'</h3><pre>'+esc(values.join(' · '))+'</pre>').join('');dialog.showModal();};document.getElementById('close').onclick=()=>dialog.close();
+const copy=svg.cloneNode(true);copy.removeAttribute('style');copy.setAttribute('width',W);copy.setAttribute('height',H);document.getElementById('download').href=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml'}));document.getElementById('fit').click();
+</script></body></html>

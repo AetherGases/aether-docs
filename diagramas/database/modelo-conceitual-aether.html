@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aether · Diagrama conceitual completo</title><style>
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 "Segoe UI",Arial,sans-serif;color:#183a40;background:#f0f4f3}header{padding:22px 28px 18px;background:#133b3d;color:white;display:flex;gap:20px;justify-content:space-between;align-items:center;flex-wrap:wrap}h1{margin:0;font-size:26px}header p{margin:4px 0 0;color:#d3e4e1}.tag{font-size:13px;border:1px solid #658c8b;border-radius:20px;padding:7px 14px}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 24px;background:#fff;border-bottom:1px solid #c9d7d7}button,a.action{font:inherit;color:#173b3b;background:white;border:1px solid #b6ccca;padding:7px 13px;border-radius:5px;cursor:pointer;text-decoration:none}button:hover,a.action:hover{background:#e9f2ef}button:focus-visible,a:focus-visible{outline:3px solid #008579;outline-offset:2px}output{min-width:58px;text-align:center;font-variant-numeric:tabular-nums}.hint{color:#576e72;margin-left:12px;font-size:13px}.legend{display:flex;gap:20px;flex-wrap:wrap;padding:10px 26px;font-size:13px}.legend strong{color:#16483f}.viewport{height:calc(100vh - 252px);min-height:500px;overflow:auto;background:#fff;border-top:1px solid #d2dfdb;border-bottom:1px solid #d2dfdb;touch-action:pan-x pan-y;cursor:grab}.viewport.dragging{cursor:grabbing;user-select:none}#model{display:block;max-width:none}#model .edge text{paint-order:stroke;stroke:white;stroke-width:5px;stroke-linejoin:round;fill:#183a40;font-weight:600}#model .edge path{stroke:#6d858a}#model .node polygon{stroke-width:1.1}footer{padding:15px 26px;max-width:1400px;color:#4d686d;font-size:13px}footer p{margin:5px 0}kbd{background:#edf2f2;border:1px solid #ccd8d7;border-radius:3px;padding:1px 4px}.note{color:#f1dfb7}header .note{font-size:12px}.entity-focus polygon{stroke:#00796b!important;stroke-width:3px!important}
+@media(max-width:650px){header{padding:16px}h1{font-size:22px}.tools{padding:10px}.hint{margin-left:0}.viewport{height:70vh}.legend{padding:10px 16px;gap:10px}.tag{display:none}}
+@media print{@page{size:A1 landscape;margin:10mm}body{background:#fff}header{background:white;color:#173b3b;padding:0 0 10px}header p{color:#526e70}.tag,.tools,.hint{display:none}.viewport{height:auto!important;min-height:0;overflow:visible;border:0}#model{width:100%!important;height:auto!important}.legend{padding:8px 0}footer{padding:8px 0;font-size:10px}header .note{color:#75654a}}
+header{background:#30363d}header p{color:#e1e5e9}.tag{border-color:#737b84}body{color:#222;background:#f4f5f7}#model .edge path{stroke:#111}#model .edge text{fill:#111}#model .node polygon{stroke:#111}.legend strong{color:#111}.viewport{background-color:#fff;background-image:none}@media print{header{background:white}}
+#model .edge{cursor:help}#model .edge.is-active path{stroke:#005ea8;stroke-width:2.5}#model .edge.is-active text{fill:#005ea8}#model .node.is-active polygon{stroke:#005ea8;stroke-width:2.5}
+body{height:100vh;display:flex;flex-direction:column;overflow:hidden}.tools,.legend{flex:none}main{flex:1;min-height:0}.viewport{height:100%;min-height:0}@media print{body{display:block;height:auto;overflow:visible}main{height:auto}.viewport{height:auto}}
+</style></head><body>
+<div class="tools" aria-label="Controles do diagrama"><button id="minus" aria-label="Diminuir zoom">−</button><output id="zoom" aria-live="polite">100%</output><button id="plus" aria-label="Aumentar zoom">+</button><button id="fit">Ajustar ao quadro</button><button id="actual">Tamanho de leitura</button><button id="print">Imprimir / PDF</button><a class="action" id="download" download="modelo-conceitual-aether.svg">Baixar SVG</a><span class="hint">Arraste para navegar · Ctrl + roda para ampliar · Tab para acessar os controles</span></div>
+<div class="legend"><span><strong>Retângulo:</strong> entidade</span><span><strong>Losango:</strong> relacionamento</span><span><strong>(0,1)</strong> zero ou um</span><span><strong>(1,1)</strong> exatamente um</span><span><strong>(0,N)</strong> zero ou vários</span><span><strong>●</strong> identificador</span><span><strong>○</strong> atributo</span></div>
+<main><div class="viewport" id="viewport" role="region" aria-label="Diagrama completo, com navegação por rolagem" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0.00 0.00 4337.67 2714.10" id="model" role="img" aria-label="Modelo conceitual Aether no estilo brModelo, com entidades, atributos externos e cardinalidades">
+<defs><pattern id="br-grid" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M 24 0 L 0 0 0 24" fill="none" stroke="#e2ebf5" stroke-width="0.8" /></pattern></defs><rect x="0" y="0" width="100%" height="100%" fill="url(#br-grid)" /><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(46.8 2667.3)">
+<title>Aether</title>
+
+<g id="edge13" class="edge" data-relationship="r6" data-source="plan" data-target="r6">
+<title>Plan — Adopted_by — Plan_subscription</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 212.00,-2056.00 L 330.00,-2056.00 L 330.00,-2056.50 L 403.00,-2056.50" />
+<text text-anchor="start" x="230.0" y="-2066.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge1" class="edge" data-relationship="r0" data-source="enterprise" data-target="r0">
+<title>Enterprise — Located_at — Address</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 215.00,-1640.60 L 327.00,-1640.60 L 327.00,-1816.50 L 758.98,-1816.50" />
+<text text-anchor="start" x="233.0" y="-1650.6" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge3" class="edge" data-relationship="r1" data-source="enterprise" data-target="r1">
+<title>Enterprise — Has — Unit</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 215.00,-1563.80 L 327.00,-1563.80 L 327.00,-1517.50 L 452.83,-1517.50" />
+<text text-anchor="start" x="233.0" y="-1573.8" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge11" class="edge" data-relationship="r5" data-source="enterprise" data-target="r5">
+<title>Enterprise — Subscribes — Plan_subscription</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 215.00,-1602.20 L 327.00,-1602.20 L 327.00,-1660.50 L 408.48,-1660.50" />
+<text text-anchor="start" x="233.0" y="-1612.2" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge17" class="edge" data-relationship="r8" data-source="enterprise" data-target="r8">
+<title>Enterprise — Defines — Permission_group</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 215.00,-1525.40 L 327.00,-1525.40 L 327.00,-1187.50 L 430.26,-1187.50" />
+<text text-anchor="start" x="233.0" y="-1535.4" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge15" class="edge" data-relationship="r7" data-source="plan_subscription" data-target="r7">
+<title>Plan_subscription — Generates — Payment</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 919.06,-2056.50 L 1031.06,-2056.50 L 1031.06,-2083.50 L 1189.89,-2083.50" />
+<text text-anchor="start" x="937.06" y="-2066.5" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge5" class="edge" data-relationship="r2" data-source="unit" data-target="r2">
+<title>Unit — Located_at — Address</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 919.06,-1496.50 L 1031.06,-1496.50 L 1031.06,-1638.50 L 1185.98,-1638.50" />
+<text text-anchor="start" x="937.06" y="-1506.5" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge7" class="edge" data-relationship="r3" data-source="unit" data-target="r3">
+<title>Unit — Organizes — Department</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 919.06,-1458.00 L 1031.06,-1458.00 L 1031.06,-1445.50 L 1191.45,-1445.50" />
+<text text-anchor="start" x="937.06" y="-1468.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge9" class="edge" data-relationship="r4" data-source="unit" data-target="r4">
+<title>Unit — Receives — Parana_seal_forecast</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 919.06,-1419.50 L 1031.06,-1419.50 L 1031.06,-1184.50 L 1197.68,-1184.50" />
+<text text-anchor="start" x="937.06" y="-1429.5" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge19" class="edge" data-relationship="r9" data-source="department" data-target="r9">
+<title>Department — Assigns — Employee</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1804.06,-1412.17 L 1916.06,-1412.17 L 1916.06,-1177.50 L 2037.18,-1177.50" />
+<text text-anchor="start" x="1822.06" y="-1422.1666666666667" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge27" class="edge" data-relationship="r13" data-source="department" data-target="r13">
+<title>Department — Contains — Inventory</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1804.06,-1450.83 L 1916.06,-1450.83 L 1916.06,-1393.50 L 2390.90,-1393.50" />
+<text text-anchor="start" x="1822.06" y="-1460.8333333333333" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge21" class="edge" data-relationship="r10" data-source="permission_group" data-target="r10">
+<title>Permission_group — Authorizes — Employee</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 919.06,-957.83 L 1031.06,-957.83 L 1031.06,-964.50 L 2020.06,-964.50" />
+<text text-anchor="start" x="937.06" y="-967.8333333333334" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge23" class="edge" data-relationship="r11" data-source="permission_group" data-target="r11">
+<title>Permission_group — Includes — Permission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 919.06,-919.17 L 1031.06,-919.17 L 1031.06,-658.50 L 1174.06,-658.50" />
+<text text-anchor="start" x="937.06" y="-929.1666666666666" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge25" class="edge" data-relationship="r12" data-source="employee" data-target="r12">
+<title>Employee — Uses_file — Storage_file</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2518.95,-999.00 L 2666.95,-999.00 L 2666.95,-1556.50 L 2739.96,-1556.50" />
+<text text-anchor="start" x="2536.95" y="-1009.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge29" class="edge" data-relationship="r14" data-source="employee" data-target="r14">
+<title>Employee — Owns — Inventory</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2518.95,-960.50 L 2666.95,-960.50 L 2666.95,-986.50 L 2761.76,-986.50" />
+<text text-anchor="start" x="2536.95" y="-970.5" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge31" class="edge" data-relationship="r15" data-source="employee" data-target="r15">
+<title>Employee — Validates — Inventory</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2518.95,-922.00 L 2666.95,-922.00 L 2666.95,-846.50 L 2739.95,-846.50" />
+<text text-anchor="start" x="2536.95" y="-932.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge39" class="edge" data-relationship="r19" data-source="scope" data-target="r19">
+<title>Scope — Classifies — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3293.74,-39.00 L 3405.74,-39.00 L 3405.74,-58.50 L 3577.20,-58.50" />
+<text text-anchor="start" x="3311.74" y="-49.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge41" class="edge" data-relationship="r20" data-source="category" data-target="r20">
+<title>Category — Categorizes — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3293.74,-302.83 L 3405.74,-302.83 L 3405.74,-377.50 L 3562.40,-377.50" />
+<text text-anchor="start" x="3311.74" y="-312.8333333333333" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge45" class="edge" data-relationship="r22" data-source="category" data-target="r22">
+<title>Category — Categorizes — Reduction</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3293.74,-264.17 L 3405.74,-264.17 L 3405.74,-217.50 L 3562.40,-217.50" />
+<text text-anchor="start" x="3311.74" y="-274.1666666666667" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge37" class="edge" data-relationship="r18" data-source="gas" data-target="r18">
+<title>Gas — Characterizes — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3293.74,-552.50 L 3405.74,-552.50 L 3405.74,-555.50 L 3550.74,-555.50" />
+<text text-anchor="start" x="3311.74" y="-562.5" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge33" class="edge" data-relationship="r16" data-source="inventory" data-target="r16">
+<title>Inventory — Uses_file — Storage_file</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3221.74,-929.00 L 3477.74,-929.00 L 3477.74,-1117.50 L 3579.52,-1117.50" />
+<text text-anchor="start" x="3239.74" y="-939.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge35" class="edge" data-relationship="r17" data-source="inventory" data-target="r17">
+<title>Inventory — Records — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3221.74,-890.50 L 3477.74,-890.50 L 3477.74,-851.50 L 3584.97,-851.50" />
+<text text-anchor="start" x="3239.74" y="-900.5" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge43" class="edge" data-relationship="r21" data-source="inventory" data-target="r21">
+<title>Inventory — Records — Reduction</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3221.74,-852.00 L 3477.74,-852.00 L 3477.74,-706.50 L 3584.97,-706.50" />
+<text text-anchor="start" x="3239.74" y="-862.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge47" class="edge" data-relationship="r23" data-source="reported_problem" data-target="r23">
+<title>Reported_problem — Attaches — Storage_file</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3293.74,-1379.00 L 3405.74,-1379.00 L 3405.74,-1379.50 L 3582.63,-1379.50" />
+<text text-anchor="start" x="3311.74" y="-1389.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge2" class="edge" data-relationship="r0" data-source="r0" data-target="address">
+<title>Enterprise — Located_at — Address</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 955.14,-1816.50 L 1479.06,-1816.50 L 1479.06,-1789.33 L 1579.06,-1789.33" />
+<text text-anchor="end" x="1561.06" y="-1799.3333333333333" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge4" class="edge" data-relationship="r1" data-source="r1" data-target="unit">
+<title>Enterprise — Has — Unit</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 560.23,-1517.50 L 607.06,-1517.50 L 607.06,-1458.00 L 707.06,-1458.00" />
+<text text-anchor="end" x="689.06" y="-1468.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge6" class="edge" data-relationship="r2" data-source="r2" data-target="address">
+<title>Unit — Located_at — Address</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1382.14,-1638.50 L 1455.06,-1638.50 L 1455.06,-1750.67 L 1579.06,-1750.67" />
+<text text-anchor="end" x="1561.06" y="-1760.6666666666667" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge8" class="edge" data-relationship="r3" data-source="r3" data-target="department">
+<title>Unit — Organizes — Department</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1376.67,-1445.50 L 1492.06,-1445.50 L 1492.06,-1431.50 L 1592.06,-1431.50" />
+<text text-anchor="end" x="1574.06" y="-1441.5" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge10" class="edge" data-relationship="r4" data-source="r4" data-target="parana_seal_forecast">
+<title>Unit — Receives — Parana_seal_forecast</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1370.44,-1184.50 L 1492.06,-1184.50 L 1492.06,-1087.00 L 1592.06,-1087.00" />
+<text text-anchor="end" x="1574.06" y="-1097.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge12" class="edge" data-relationship="r5" data-source="r5" data-target="plan_subscription">
+<title>Enterprise — Subscribes — Plan_subscription</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 604.59,-1660.50 L 628.59,-1660.50 L 628.59,-2037.17 L 707.06,-2037.17" />
+<text text-anchor="end" x="689.06" y="-2047.1666666666667" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge14" class="edge" data-relationship="r6" data-source="r6" data-target="plan_subscription">
+<title>Plan — Adopted_by — Plan_subscription</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 610.06,-2056.50 L 634.06,-2056.50 L 634.06,-2075.83 L 707.06,-2075.83" />
+<text text-anchor="end" x="689.06" y="-2085.8333333333335" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge16" class="edge" data-relationship="r7" data-source="r7" data-target="payment">
+<title>Plan_subscription — Generates — Payment</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1378.23,-2083.50 L 1461.06,-2083.50 L 1461.06,-2214.00 L 1561.06,-2214.00" />
+<text text-anchor="end" x="1543.06" y="-2224.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge18" class="edge" data-relationship="r8" data-source="r8" data-target="permission_group">
+<title>Enterprise — Defines — Permission_group</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 582.80,-1187.50 L 607.06,-1187.50 L 607.06,-938.50 L 707.06,-938.50" />
+<text text-anchor="end" x="689.06" y="-948.5" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge20" class="edge" data-relationship="r9" data-source="r9" data-target="employee">
+<title>Department — Assigns — Employee</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2192.83,-1177.50 L 2216.83,-1177.50 L 2216.83,-986.17 L 2306.95,-986.17" />
+<text text-anchor="end" x="2288.95" y="-996.1666666666666" font-family="Arial" font-size="14.00" fill="#111111">(1,1)</text>
+</g>
+
+<g id="edge22" class="edge" data-relationship="r10" data-source="r10" data-target="employee">
+<title>Permission_group — Authorizes — Employee</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2209.95,-964.50 L 2233.95,-964.50 L 2233.95,-934.83 L 2306.95,-934.83" />
+<text text-anchor="end" x="2288.95" y="-944.8333333333334" font-family="Arial" font-size="14.00" fill="#111111">(1,1)</text>
+</g>
+
+<g id="edge24" class="edge" data-relationship="r11" data-source="r11" data-target="permission">
+<title>Permission_group — Includes — Permission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 1394.06,-658.50 L 1492.06,-658.50 L 1492.06,-615.00 L 1592.06,-615.00" />
+<text text-anchor="end" x="1574.06" y="-625.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge26" class="edge" data-relationship="r12" data-source="r12" data-target="storage_file">
+<title>Employee — Uses_file — Storage_file</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2912.72,-1556.50 L 3811.07,-1556.50 L 3811.07,-1467.00 L 3911.07,-1467.00" />
+<text text-anchor="end" x="3893.07" y="-1477.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge28" class="edge" data-relationship="r13" data-source="r13" data-target="inventory">
+<title>Department — Contains — Inventory</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2559.00,-1393.50 L 2909.74,-1393.50 L 2909.74,-929.00 L 3009.74,-929.00" />
+<text text-anchor="end" x="2991.74" y="-939.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge30" class="edge" data-relationship="r14" data-source="r14" data-target="inventory">
+<title>Employee — Owns — Inventory</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2890.93,-986.50 L 2914.93,-986.50 L 2914.93,-890.50 L 3009.74,-890.50" />
+<text text-anchor="end" x="2991.74" y="-900.5" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge32" class="edge" data-relationship="r15" data-source="r15" data-target="inventory">
+<title>Employee — Validates — Inventory</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 2912.74,-846.50 L 2936.74,-846.50 L 2936.74,-852.00 L 3009.74,-852.00" />
+<text text-anchor="end" x="2991.74" y="-862.0" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge34" class="edge" data-relationship="r16" data-source="r16" data-target="storage_file">
+<title>Inventory — Uses_file — Storage_file</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3752.28,-1117.50 L 3776.28,-1117.50 L 3776.28,-1390.00 L 3911.07,-1390.00" />
+<text text-anchor="end" x="3893.07" y="-1400.0" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="edge36" class="edge" data-relationship="r17" data-source="r17" data-target="emission">
+<title>Inventory — Records — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3746.83,-851.50 L 3778.07,-851.50 L 3778.07,-619.60 L 3878.07,-619.60" />
+<text text-anchor="end" x="3860.07" y="-629.6" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge38" class="edge" data-relationship="r18" data-source="r18" data-target="emission">
+<title>Gas — Characterizes — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3781.07,-555.50 L 3805.07,-555.50 L 3805.07,-581.20 L 3878.07,-581.20" />
+<text text-anchor="end" x="3860.07" y="-591.2" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge40" class="edge" data-relationship="r19" data-source="r19" data-target="emission">
+<title>Scope — Classifies — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3754.60,-58.50 L 3778.60,-58.50 L 3778.60,-504.40 L 3878.07,-504.40" />
+<text text-anchor="end" x="3860.07" y="-514.4" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge42" class="edge" data-relationship="r20" data-source="r20" data-target="emission">
+<title>Category — Categorizes — Emission</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3769.40,-377.50 L 3793.40,-377.50 L 3793.40,-542.80 L 3878.07,-542.80" />
+<text text-anchor="end" x="3860.07" y="-552.8" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge44" class="edge" data-relationship="r21" data-source="r21" data-target="reduction">
+<title>Inventory — Records — Reduction</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3746.83,-706.50 L 3811.07,-706.50 L 3811.07,-230.33 L 3911.07,-230.33" />
+<text text-anchor="end" x="3893.07" y="-240.33333333333334" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge46" class="edge" data-relationship="r22" data-source="r22" data-target="reduction">
+<title>Category — Categorizes — Reduction</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3769.40,-217.50 L 3793.40,-217.50 L 3793.40,-191.67 L 3911.07,-191.67" />
+<text text-anchor="end" x="3893.07" y="-201.66666666666669" font-family="Arial" font-size="14.00" fill="#111111">(0,1)</text>
+</g>
+
+<g id="edge48" class="edge" data-relationship="r23" data-source="r23" data-target="storage_file">
+<title>Reported_problem — Attaches — Storage_file</title>
+<path fill="none" stroke="#111111" stroke-width="1.2" d="M 3749.18,-1379.50 L 3787.07,-1379.50 L 3787.07,-1428.50 L 3911.07,-1428.50" />
+<text text-anchor="end" x="3893.07" y="-1438.5" font-family="Arial" font-size="14.00" fill="#111111">(0,n)</text>
+</g>
+
+<g id="node1" class="node">
+<title>plan</title>
+<rect x="0.0" y="-2095.0" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="106.0" y="-2051.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Plan</text><path d="M 17.0 -2095.0 V -2292.0 H 52.0" fill="none" stroke="black" stroke-width="1" /><circle cx="52.0" cy="-2292.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="64.0" y="-2287.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 31.0 -2095.0 V -2267.0 H 66.0" fill="none" stroke="black" stroke-width="1" /><circle cx="66.0" cy="-2267.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="78.0" y="-2262.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 45.0 -2095.0 V -2242.0 H 80.0" fill="none" stroke="black" stroke-width="1" /><circle cx="80.0" cy="-2242.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="92.0" y="-2237.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">description</text><path d="M 59.0 -2095.0 V -2217.0 H 94.0" fill="none" stroke="black" stroke-width="1" /><circle cx="94.0" cy="-2217.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="106.0" y="-2212.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">price</text><path d="M 73.0 -2095.0 V -2192.0 H 108.0" fill="none" stroke="black" stroke-width="1" /><circle cx="108.0" cy="-2192.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="120.0" y="-2187.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">duration_days</text><path d="M 87.0 -2095.0 V -2167.0 H 122.0" fill="none" stroke="black" stroke-width="1" /><circle cx="122.0" cy="-2167.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="134.0" y="-2162.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">is_active</text><path d="M 101.0 -2095.0 V -2142.0 H 136.0" fill="none" stroke="black" stroke-width="1" /><circle cx="136.0" cy="-2142.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="148.0" y="-2137.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 115.0 -2095.0 V -2117.0 H 150.0" fill="none" stroke="black" stroke-width="1" /><circle cx="150.0" cy="-2117.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="162.0" y="-2112.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node2" class="node">
+<title>address</title>
+<rect x="1579.06" y="-1828.0" width="212" height="116.0" fill="white" stroke="black" stroke-width="1.3" /><text x="1685.06" y="-1765.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Address</text><path d="M 1596.06 -1828.0 V -2075.0 H 1631.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1631.06" cy="-2075.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="1643.06" y="-2070.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 1610.06 -1828.0 V -2050.0 H 1645.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1645.06" cy="-2050.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1657.06" y="-2045.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">zip_code</text><path d="M 1624.06 -1828.0 V -2025.0 H 1659.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1659.06" cy="-2025.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1671.06" y="-2020.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">state</text><path d="M 1638.06 -1828.0 V -2000.0 H 1673.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1673.06" cy="-2000.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1685.06" y="-1995.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">city</text><path d="M 1652.06 -1828.0 V -1975.0 H 1687.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1687.06" cy="-1975.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1699.06" y="-1970.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">neighborhood</text><path d="M 1666.06 -1828.0 V -1950.0 H 1701.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1701.06" cy="-1950.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1713.06" y="-1945.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">street</text><path d="M 1680.06 -1828.0 V -1925.0 H 1715.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1715.06" cy="-1925.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1727.06" y="-1920.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">number</text><path d="M 1694.06 -1828.0 V -1900.0 H 1729.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1729.06" cy="-1900.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1741.06" y="-1895.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">complement</text><path d="M 1708.06 -1828.0 V -1875.0 H 1743.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1743.06" cy="-1875.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1755.06" y="-1870.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 1722.06 -1828.0 V -1850.0 H 1757.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1757.06" cy="-1850.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1769.06" y="-1845.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node3" class="node">
+<title>enterprise</title>
+<rect x="3.0" y="-1679.0" width="212" height="192.0" fill="white" stroke="black" stroke-width="1.3" /><text x="109.0" y="-1578.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Enterprise</text><path d="M 20.0 -1679.0 V -1826.0 H 55.0" fill="none" stroke="black" stroke-width="1" /><circle cx="55.0" cy="-1826.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="67.0" y="-1821.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 34.0 -1679.0 V -1801.0 H 69.0" fill="none" stroke="black" stroke-width="1" /><circle cx="69.0" cy="-1801.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="81.0" y="-1796.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 48.0 -1679.0 V -1776.0 H 83.0" fill="none" stroke="black" stroke-width="1" /><circle cx="83.0" cy="-1776.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="95.0" y="-1771.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">trade_name</text><path d="M 62.0 -1679.0 V -1751.0 H 97.0" fill="none" stroke="black" stroke-width="1" /><circle cx="97.0" cy="-1751.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="109.0" y="-1746.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">cnpj</text><path d="M 76.0 -1679.0 V -1726.0 H 111.0" fill="none" stroke="black" stroke-width="1" /><circle cx="111.0" cy="-1726.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="123.0" y="-1721.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 90.0 -1679.0 V -1701.0 H 125.0" fill="none" stroke="black" stroke-width="1" /><circle cx="125.0" cy="-1701.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="137.0" y="-1696.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node4" class="node">
+<title>plan_subscription</title>
+<rect x="707.06" y="-2114.5" width="212" height="116.0" fill="white" stroke="black" stroke-width="1.3" /><text x="813.06" y="-2051.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Plan_subscription</text><path d="M 724.06 -2114.5 V -2236.5 H 759.06" fill="none" stroke="black" stroke-width="1" /><circle cx="759.06" cy="-2236.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="771.06" y="-2231.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 738.06 -2114.5 V -2211.5 H 773.06" fill="none" stroke="black" stroke-width="1" /><circle cx="773.06" cy="-2211.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="785.06" y="-2206.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">is_active</text><path d="M 752.06 -2114.5 V -2186.5 H 787.06" fill="none" stroke="black" stroke-width="1" /><circle cx="787.06" cy="-2186.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="799.06" y="-2181.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">installments</text><path d="M 766.06 -2114.5 V -2161.5 H 801.06" fill="none" stroke="black" stroke-width="1" /><circle cx="801.06" cy="-2161.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="813.06" y="-2156.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 780.06 -2114.5 V -2136.5 H 815.06" fill="none" stroke="black" stroke-width="1" /><circle cx="815.06" cy="-2136.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="827.06" y="-2131.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">deactivated_at</text></g>
+
+<g id="node5" class="node">
+<title>payment</title>
+<rect x="1561.06" y="-2253.0" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="1667.06" y="-2209.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Payment</text><path d="M 1578.06 -2253.0 V -2450.0 H 1613.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1613.06" cy="-2450.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="1625.06" y="-2445.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 1592.06 -2253.0 V -2425.0 H 1627.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1627.06" cy="-2425.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1639.06" y="-2420.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">value</text><path d="M 1606.06 -2253.0 V -2400.0 H 1641.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1641.06" cy="-2400.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1653.06" y="-2395.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">term</text><path d="M 1620.06 -2253.0 V -2375.0 H 1655.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1655.06" cy="-2375.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1667.06" y="-2370.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">status</text><path d="M 1634.06 -2253.0 V -2350.0 H 1669.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1669.06" cy="-2350.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1681.06" y="-2345.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 1648.06 -2253.0 V -2325.0 H 1683.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1683.06" cy="-2325.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1695.06" y="-2320.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text><path d="M 1662.06 -2253.0 V -2300.0 H 1697.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1697.06" cy="-2300.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1709.06" y="-2295.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">additional_use_value</text><path d="M 1676.06 -2253.0 V -2275.0 H 1711.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1711.06" cy="-2275.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1723.06" y="-2270.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">due_date</text></g>
+
+<g id="node6" class="node">
+<title>unit</title>
+<rect x="707.06" y="-1535.0" width="212" height="154.0" fill="white" stroke="black" stroke-width="1.3" /><text x="813.06" y="-1453.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Unit</text><path d="M 724.06 -1535.0 V -1682.0 H 759.06" fill="none" stroke="black" stroke-width="1" /><circle cx="759.06" cy="-1682.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="771.06" y="-1677.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 738.06 -1535.0 V -1657.0 H 773.06" fill="none" stroke="black" stroke-width="1" /><circle cx="773.06" cy="-1657.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="785.06" y="-1652.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">cnae</text><path d="M 752.06 -1535.0 V -1632.0 H 787.06" fill="none" stroke="black" stroke-width="1" /><circle cx="787.06" cy="-1632.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="799.06" y="-1627.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">cnpj</text><path d="M 766.06 -1535.0 V -1607.0 H 801.06" fill="none" stroke="black" stroke-width="1" /><circle cx="801.06" cy="-1607.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="813.06" y="-1602.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">is_active</text><path d="M 780.06 -1535.0 V -1582.0 H 815.06" fill="none" stroke="black" stroke-width="1" /><circle cx="815.06" cy="-1582.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="827.06" y="-1577.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 794.06 -1535.0 V -1557.0 H 829.06" fill="none" stroke="black" stroke-width="1" /><circle cx="829.06" cy="-1557.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="841.06" y="-1552.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node7" class="node">
+<title>department</title>
+<rect x="1592.06" y="-1489.5" width="212" height="116.0" fill="white" stroke="black" stroke-width="1.3" /><text x="1698.06" y="-1426.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Department</text><path d="M 1609.06 -1489.5 V -1611.5 H 1644.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1644.06" cy="-1611.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="1656.06" y="-1606.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 1623.06 -1489.5 V -1586.5 H 1658.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1658.06" cy="-1586.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1670.06" y="-1581.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 1637.06 -1489.5 V -1561.5 H 1672.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1672.06" cy="-1561.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1684.06" y="-1556.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">description</text><path d="M 1651.06 -1489.5 V -1536.5 H 1686.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1686.06" cy="-1536.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1698.06" y="-1531.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 1665.06 -1489.5 V -1511.5 H 1700.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1700.06" cy="-1511.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1712.06" y="-1506.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node8" class="node">
+<title>permission_group</title>
+<rect x="707.06" y="-996.5" width="212" height="116.0" fill="white" stroke="black" stroke-width="1.3" /><text x="813.06" y="-933.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Permission_group</text><path d="M 724.06 -996.5 V -1068.5 H 759.06" fill="none" stroke="black" stroke-width="1" /><circle cx="759.06" cy="-1068.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="771.06" y="-1063.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 738.06 -996.5 V -1043.5 H 773.06" fill="none" stroke="black" stroke-width="1" /><circle cx="773.06" cy="-1043.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="785.06" y="-1038.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">description</text><path d="M 752.06 -996.5 V -1018.5 H 787.06" fill="none" stroke="black" stroke-width="1" /><circle cx="787.06" cy="-1018.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="799.06" y="-1013.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text></g>
+
+<g id="node9" class="node">
+<title>permission</title>
+<rect x="1592.06" y="-654.0" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="1698.06" y="-610.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Permission</text><path d="M 1609.06 -654.0 V -801.0 H 1644.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1644.06" cy="-801.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="1656.06" y="-796.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 1623.06 -654.0 V -776.0 H 1658.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1658.06" cy="-776.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1670.06" y="-771.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 1637.06 -654.0 V -751.0 H 1672.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1672.06" cy="-751.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1684.06" y="-746.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">description</text><path d="M 1651.06 -654.0 V -726.0 H 1686.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1686.06" cy="-726.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1698.06" y="-721.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">pattern</text><path d="M 1665.06 -654.0 V -701.0 H 1700.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1700.06" cy="-701.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1712.06" y="-696.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 1679.06 -654.0 V -676.0 H 1714.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1714.06" cy="-676.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1726.06" y="-671.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node10" class="node">
+<title>parana_seal_forecast</title>
+<rect x="1592.06" y="-1126.0" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="1698.06" y="-1082.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Parana_seal_forecast</text><path d="M 1609.06 -1126.0 V -1273.0 H 1644.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1644.06" cy="-1273.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="1656.06" y="-1268.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 1623.06 -1126.0 V -1248.0 H 1658.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1658.06" cy="-1248.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1670.06" y="-1243.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">score</text><path d="M 1637.06 -1126.0 V -1223.0 H 1672.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1672.06" cy="-1223.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1684.06" y="-1218.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">level</text><path d="M 1651.06 -1126.0 V -1198.0 H 1686.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1686.06" cy="-1198.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1698.06" y="-1193.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">valid_until</text><path d="M 1665.06 -1126.0 V -1173.0 H 1700.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1700.06" cy="-1173.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1712.06" y="-1168.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 1679.06 -1126.0 V -1148.0 H 1714.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1714.06" cy="-1148.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1726.06" y="-1143.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node11" class="node">
+<title>administrator</title>
+<rect x="3.0" y="-2470.5" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="109.0" y="-2426.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Administrator</text><path d="M 20.0 -2470.5 V -2592.5 H 55.0" fill="none" stroke="black" stroke-width="1" /><circle cx="55.0" cy="-2592.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="67.0" y="-2587.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 34.0 -2470.5 V -2567.5 H 69.0" fill="none" stroke="black" stroke-width="1" /><circle cx="69.0" cy="-2567.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="81.0" y="-2562.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">email</text><path d="M 48.0 -2470.5 V -2542.5 H 83.0" fill="none" stroke="black" stroke-width="1" /><circle cx="83.0" cy="-2542.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="95.0" y="-2537.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">password_hash</text><path d="M 62.0 -2470.5 V -2517.5 H 97.0" fill="none" stroke="black" stroke-width="1" /><circle cx="97.0" cy="-2517.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="109.0" y="-2512.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 76.0 -2470.5 V -2492.5 H 111.0" fill="none" stroke="black" stroke-width="1" /><circle cx="111.0" cy="-2492.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="123.0" y="-2487.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node12" class="node">
+<title>storage_file</title>
+<rect x="3911.07" y="-1505.5" width="212" height="154.0" fill="white" stroke="black" stroke-width="1.3" /><text x="4017.07" y="-1423.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Storage_file</text><path d="M 3928.07 -1505.5 V -1627.5 H 3963.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3963.07" cy="-1627.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3975.07" y="-1622.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3942.07 -1505.5 V -1602.5 H 3977.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3977.07" cy="-1602.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3989.07" y="-1597.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 3956.07 -1505.5 V -1577.5 H 3991.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3991.07" cy="-1577.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="4003.07" y="-1572.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">path</text><path d="M 3970.07 -1505.5 V -1552.5 H 4005.07" fill="none" stroke="black" stroke-width="1" /><circle cx="4005.07" cy="-1552.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="4017.07" y="-1547.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 3984.07 -1505.5 V -1527.5 H 4019.07" fill="none" stroke="black" stroke-width="1" /><circle cx="4019.07" cy="-1527.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="4031.07" y="-1522.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node13" class="node">
+<title>employee</title>
+<rect x="2306.95" y="-1037.5" width="212" height="154.0" fill="white" stroke="black" stroke-width="1.3" /><text x="2412.95" y="-955.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Employee</text><path d="M 2323.95 -1037.5 V -1259.5 H 2358.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2358.95" cy="-1259.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="2370.95" y="-1254.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 2337.95 -1037.5 V -1234.5 H 2372.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2372.95" cy="-1234.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2384.95" y="-1229.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">cpf</text><path d="M 2351.95 -1037.5 V -1209.5 H 2386.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2386.95" cy="-1209.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2398.95" y="-1204.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 2365.95 -1037.5 V -1184.5 H 2400.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2400.95" cy="-1184.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2412.95" y="-1179.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">email</text><path d="M 2379.95 -1037.5 V -1159.5 H 2414.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2414.95" cy="-1159.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2426.95" y="-1154.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">phone</text><path d="M 2393.95 -1037.5 V -1134.5 H 2428.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2428.95" cy="-1134.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2440.95" y="-1129.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">password_hash</text><path d="M 2407.95 -1037.5 V -1109.5 H 2442.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2442.95" cy="-1109.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2454.95" y="-1104.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">employee_status</text><path d="M 2421.95 -1037.5 V -1084.5 H 2456.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2456.95" cy="-1084.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2468.95" y="-1079.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 2435.95 -1037.5 V -1059.5 H 2470.95" fill="none" stroke="black" stroke-width="1" /><circle cx="2470.95" cy="-1059.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="2482.95" y="-1054.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node14" class="node">
+<title>scope</title>
+<rect x="3081.74" y="-78.0" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="3187.74" y="-34.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Scope</text><path d="M 3098.74 -78.0 V -125.0 H 3133.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3133.74" cy="-125.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3145.74" y="-120.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3112.74 -78.0 V -100.0 H 3147.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3147.74" cy="-100.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3159.74" y="-95.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text></g>
+
+<g id="node15" class="node">
+<title>category</title>
+<rect x="3081.74" y="-341.5" width="212" height="116.0" fill="white" stroke="black" stroke-width="1.3" /><text x="3187.74" y="-278.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Category</text><path d="M 3098.74 -341.5 V -413.5 H 3133.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3133.74" cy="-413.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3145.74" y="-408.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3112.74 -341.5 V -388.5 H 3147.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3147.74" cy="-388.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3159.74" y="-383.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 3126.74 -341.5 V -363.5 H 3161.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3161.74" cy="-363.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3173.74" y="-358.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">classification</text></g>
+
+<g id="node16" class="node">
+<title>gas</title>
+<rect x="3081.74" y="-591.5" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="3187.74" y="-547.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Gas</text><path d="M 3098.74 -591.5 V -713.5 H 3133.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3133.74" cy="-713.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3145.74" y="-708.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3112.74 -591.5 V -688.5 H 3147.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3147.74" cy="-688.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3159.74" y="-683.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 3126.74 -591.5 V -663.5 H 3161.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3161.74" cy="-663.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3173.74" y="-658.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">formula</text><path d="M 3140.74 -591.5 V -638.5 H 3175.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3175.74" cy="-638.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3187.74" y="-633.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">is_biogenic</text><path d="M 3154.74 -591.5 V -613.5 H 3189.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3189.74" cy="-613.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3201.74" y="-608.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">gwp</text></g>
+
+<g id="node17" class="node">
+<title>inventory</title>
+<rect x="3009.74" y="-967.5" width="212" height="154.0" fill="white" stroke="black" stroke-width="1.3" /><text x="3115.74" y="-885.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Inventory</text><path d="M 3026.74 -967.5 V -1239.5 H 3061.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3061.74" cy="-1239.5" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3073.74" y="-1234.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3040.74 -967.5 V -1214.5 H 3075.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3075.74" cy="-1214.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3087.74" y="-1209.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">name</text><path d="M 3054.74 -967.5 V -1189.5 H 3089.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3089.74" cy="-1189.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3101.74" y="-1184.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">description</text><path d="M 3068.74 -967.5 V -1164.5 H 3103.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3103.74" cy="-1164.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3115.74" y="-1159.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">consolidation_approach</text><path d="M 3082.74 -967.5 V -1139.5 H 3117.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3117.74" cy="-1139.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3129.74" y="-1134.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">inventorying_period_start</text><path d="M 3096.74 -967.5 V -1114.5 H 3131.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3131.74" cy="-1114.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3143.74" y="-1109.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">inventorying_period_end</text><path d="M 3110.74 -967.5 V -1089.5 H 3145.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3145.74" cy="-1089.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3157.74" y="-1084.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">status</text><path d="M 3124.74 -967.5 V -1064.5 H 3159.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3159.74" cy="-1064.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3171.74" y="-1059.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">status_message</text><path d="M 3138.74 -967.5 V -1039.5 H 3173.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3173.74" cy="-1039.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3185.74" y="-1034.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">type</text><path d="M 3152.74 -967.5 V -1014.5 H 3187.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3187.74" cy="-1014.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3199.74" y="-1009.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 3166.74 -967.5 V -989.5 H 3201.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3201.74" cy="-989.5" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3213.74" y="-984.5" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node18" class="node">
+<title>emission</title>
+<rect x="3878.07" y="-658.0" width="212" height="192.0" fill="white" stroke="black" stroke-width="1.3" /><text x="3984.07" y="-557.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Emission</text><path d="M 3895.07 -658.0 V -805.0 H 3930.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3930.07" cy="-805.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3942.07" y="-800.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3909.07 -658.0 V -780.0 H 3944.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3944.07" cy="-780.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3956.07" y="-775.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">quantity_co2e</text><path d="M 3923.07 -658.0 V -755.0 H 3958.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3958.07" cy="-755.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3970.07" y="-750.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">methodology_description</text><path d="M 3937.07 -658.0 V -730.0 H 3972.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3972.07" cy="-730.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3984.07" y="-725.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">supplier_data_percentage</text><path d="M 3951.07 -658.0 V -705.0 H 3986.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3986.07" cy="-705.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3998.07" y="-700.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 3965.07 -658.0 V -680.0 H 4000.07" fill="none" stroke="black" stroke-width="1" /><circle cx="4000.07" cy="-680.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="4012.07" y="-675.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node19" class="node">
+<title>reduction</title>
+<rect x="3911.07" y="-269.0" width="212" height="116.0" fill="white" stroke="black" stroke-width="1.3" /><text x="4017.07" y="-206.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Reduction</text><path d="M 3928.07 -269.0 V -366.0 H 3963.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3963.07" cy="-366.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3975.07" y="-361.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3942.07 -269.0 V -341.0 H 3977.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3977.07" cy="-341.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3989.07" y="-336.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">quantity_co2e</text><path d="M 3956.07 -269.0 V -316.0 H 3991.07" fill="none" stroke="black" stroke-width="1" /><circle cx="3991.07" cy="-316.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="4003.07" y="-311.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 3970.07 -269.0 V -291.0 H 4005.07" fill="none" stroke="black" stroke-width="1" /><circle cx="4005.07" cy="-291.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="4017.07" y="-286.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node20" class="node">
+<title>reported_problem</title>
+<rect x="3081.74" y="-1418.0" width="212" height="78.0" fill="white" stroke="black" stroke-width="1.3" /><text x="3187.74" y="-1374.0" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Reported_problem</text><path d="M 3098.74 -1418.0 V -1515.0 H 3133.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3133.74" cy="-1515.0" r="6.5" fill="black" stroke="black" stroke-width="1.1" /><text x="3145.74" y="-1510.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">id</text><path d="M 3112.74 -1418.0 V -1490.0 H 3147.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3147.74" cy="-1490.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3159.74" y="-1485.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">category</text><path d="M 3126.74 -1418.0 V -1465.0 H 3161.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3161.74" cy="-1465.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3173.74" y="-1460.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">description</text><path d="M 3140.74 -1418.0 V -1440.0 H 3175.74" fill="none" stroke="black" stroke-width="1" /><circle cx="3175.74" cy="-1440.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="3187.74" y="-1435.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">screen</text></g>
+
+<g id="node21" class="node">
+<title>r0</title>
+<polygon fill="white" stroke="black" points="857.06,-1850.58 758.98,-1816.5 857.06,-1782.42 955.14,-1816.5 857.06,-1850.58" />
+<text text-anchor="middle" x="857.06" y="-1812.3" font-family="Arial" font-size="14.00">Located_at</text>
+</g>
+
+<g id="node22" class="node">
+<title>r1</title>
+<polygon fill="white" stroke="black" points="506.53,-1551.58 452.83,-1517.5 506.53,-1483.42 560.23,-1517.5 506.53,-1551.58" />
+<text text-anchor="middle" x="506.53" y="-1513.3" font-family="Arial" font-size="14.00">Has</text>
+</g>
+
+<g id="node23" class="node">
+<title>r2</title>
+<polygon fill="white" stroke="black" points="1284.06,-1672.58 1185.98,-1638.5 1284.06,-1604.42 1382.14,-1638.5 1284.06,-1672.58" />
+<text text-anchor="middle" x="1284.06" y="-1634.3" font-family="Arial" font-size="14.00">Located_at</text>
+</g>
+
+<g id="node24" class="node">
+<title>r3</title>
+<polygon fill="white" stroke="black" points="1284.06,-1479.58 1191.45,-1445.5 1284.06,-1411.42 1376.67,-1445.5 1284.06,-1479.58" />
+<text text-anchor="middle" x="1284.06" y="-1441.3" font-family="Arial" font-size="14.00">Organizes</text>
+</g>
+
+<g id="node25" class="node">
+<title>r4</title>
+<polygon fill="white" stroke="black" points="1284.06,-1218.58 1197.68,-1184.5 1284.06,-1150.42 1370.44,-1184.5 1284.06,-1218.58" />
+<text text-anchor="middle" x="1284.06" y="-1180.3" font-family="Arial" font-size="14.00">Receives</text>
+</g>
+
+<g id="node26" class="node">
+<title>r5</title>
+<polygon fill="white" stroke="black" points="506.53,-1694.58 408.48,-1660.5 506.53,-1626.42 604.59,-1660.5 506.53,-1694.58" />
+<text text-anchor="middle" x="506.53" y="-1656.3" font-family="Arial" font-size="14.00">Subscribes</text>
+</g>
+
+<g id="node27" class="node">
+<title>r6</title>
+<polygon fill="white" stroke="black" points="506.53,-2090.58 403,-2056.5 506.53,-2022.42 610.06,-2056.5 506.53,-2090.58" />
+<text text-anchor="middle" x="506.53" y="-2052.3" font-family="Arial" font-size="14.00">Adopted_by</text>
+</g>
+
+<g id="node28" class="node">
+<title>r7</title>
+<polygon fill="white" stroke="black" points="1284.06,-2117.58 1189.89,-2083.5 1284.06,-2049.42 1378.23,-2083.5 1284.06,-2117.58" />
+<text text-anchor="middle" x="1284.06" y="-2079.3" font-family="Arial" font-size="14.00">Generates</text>
+</g>
+
+<g id="node29" class="node">
+<title>r8</title>
+<polygon fill="white" stroke="black" points="506.53,-1221.58 430.26,-1187.5 506.53,-1153.42 582.8,-1187.5 506.53,-1221.58" />
+<text text-anchor="middle" x="506.53" y="-1183.3" font-family="Arial" font-size="14.00">Defines</text>
+</g>
+
+<g id="node30" class="node">
+<title>r9</title>
+<polygon fill="white" stroke="black" points="2115.01,-1211.58 2037.18,-1177.5 2115.01,-1143.42 2192.83,-1177.5 2115.01,-1211.58" />
+<text text-anchor="middle" x="2115.01" y="-1173.3" font-family="Arial" font-size="14.00">Assigns</text>
+</g>
+
+<g id="node31" class="node">
+<title>r10</title>
+<polygon fill="white" stroke="black" points="2115.01,-998.58 2020.06,-964.5 2115.01,-930.42 2209.95,-964.5 2115.01,-998.58" />
+<text text-anchor="middle" x="2115.01" y="-960.3" font-family="Arial" font-size="14.00">Authorizes</text>
+</g>
+
+<g id="node32" class="node">
+<title>r11</title>
+<polygon points="1174.06,-658.5 1284.06,-696.0 1394.06,-658.5 1284.06,-621.0" fill="white" stroke="black" stroke-width="1.3" /><text x="1284.06" y="-653.5" text-anchor="middle" font-family="Arial" font-size="17" font-weight="bold" fill="black">Includes</text><path d="M 1191.06 -664.2954545454545 V -743.0 H 1226.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1226.06" cy="-743.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1238.06" y="-738.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">created_at</text><path d="M 1205.06 -669.0681818181819 V -718.0 H 1240.06" fill="none" stroke="black" stroke-width="1" /><circle cx="1240.06" cy="-718.0" r="6.5" fill="white" stroke="black" stroke-width="1.1" /><text x="1252.06" y="-713.0" font-family="Arial" font-size="15" font-weight="bold" fill="black">updated_at</text></g>
+
+<g id="node33" class="node">
+<title>r12</title>
+<polygon fill="white" stroke="black" points="2826.34,-1590.58 2739.96,-1556.5 2826.34,-1522.42 2912.72,-1556.5 2826.34,-1590.58" />
+<text text-anchor="middle" x="2826.34" y="-1552.3" font-family="Arial" font-size="14.00">Uses_file</text>
+</g>
+
+<g id="node34" class="node">
+<title>r13</title>
+<polygon fill="white" stroke="black" points="2474.95,-1427.58 2390.9,-1393.5 2474.95,-1359.42 2559,-1393.5 2474.95,-1427.58" />
+<text text-anchor="middle" x="2474.95" y="-1389.3" font-family="Arial" font-size="14.00">Contains</text>
+</g>
+
+<g id="node35" class="node">
+<title>r14</title>
+<polygon fill="white" stroke="black" points="2826.34,-1020.58 2761.76,-986.5 2826.34,-952.42 2890.93,-986.5 2826.34,-1020.58" />
+<text text-anchor="middle" x="2826.34" y="-982.3" font-family="Arial" font-size="14.00">Owns</text>
+</g>
+
+<g id="node36" class="node">
+<title>r15</title>
+<polygon fill="white" stroke="black" points="2826.34,-880.58 2739.95,-846.5 2826.34,-812.42 2912.74,-846.5 2826.34,-880.58" />
+<text text-anchor="middle" x="2826.34" y="-842.3" font-family="Arial" font-size="14.00">Validates</text>
+</g>
+
+<g id="node37" class="node">
+<title>r16</title>
+<polygon fill="white" stroke="black" points="3665.9,-1151.58 3579.52,-1117.5 3665.9,-1083.42 3752.28,-1117.5 3665.9,-1151.58" />
+<text text-anchor="middle" x="3665.9" y="-1113.3" font-family="Arial" font-size="14.00">Uses_file</text>
+</g>
+
+<g id="node38" class="node">
+<title>r17</title>
+<polygon fill="white" stroke="black" points="3665.9,-885.58 3584.97,-851.5 3665.9,-817.42 3746.83,-851.5 3665.9,-885.58" />
+<text text-anchor="middle" x="3665.9" y="-847.3" font-family="Arial" font-size="14.00">Records</text>
+</g>
+
+<g id="node39" class="node">
+<title>r18</title>
+<polygon fill="white" stroke="black" points="3665.9,-589.58 3550.74,-555.5 3665.9,-521.42 3781.07,-555.5 3665.9,-589.58" />
+<text text-anchor="middle" x="3665.9" y="-551.3" font-family="Arial" font-size="14.00">Characterizes</text>
+</g>
+
+<g id="node40" class="node">
+<title>r19</title>
+<polygon fill="white" stroke="black" points="3665.9,-92.58 3577.2,-58.5 3665.9,-24.42 3754.6,-58.5 3665.9,-92.58" />
+<text text-anchor="middle" x="3665.9" y="-54.3" font-family="Arial" font-size="14.00">Classifies</text>
+</g>
+
+<g id="node41" class="node">
+<title>r20</title>
+<polygon fill="white" stroke="black" points="3665.9,-411.58 3562.4,-377.5 3665.9,-343.42 3769.4,-377.5 3665.9,-411.58" />
+<text text-anchor="middle" x="3665.9" y="-373.3" font-family="Arial" font-size="14.00">Categorizes</text>
+</g>
+
+<g id="node42" class="node">
+<title>r21</title>
+<polygon fill="white" stroke="black" points="3665.9,-740.58 3584.97,-706.5 3665.9,-672.42 3746.83,-706.5 3665.9,-740.58" />
+<text text-anchor="middle" x="3665.9" y="-702.3" font-family="Arial" font-size="14.00">Records</text>
+</g>
+
+<g id="node43" class="node">
+<title>r22</title>
+<polygon fill="white" stroke="black" points="3665.9,-251.58 3562.4,-217.5 3665.9,-183.42 3769.4,-217.5 3665.9,-251.58" />
+<text text-anchor="middle" x="3665.9" y="-213.3" font-family="Arial" font-size="14.00">Categorizes</text>
+</g>
+
+<g id="node44" class="node">
+<title>r23</title>
+<polygon fill="white" stroke="black" points="3665.9,-1413.58 3582.63,-1379.5 3665.9,-1345.42 3749.18,-1379.5 3665.9,-1413.58" />
+<text text-anchor="middle" x="3665.9" y="-1375.3" font-family="Arial" font-size="14.00">Attaches</text>
+</g>
+</g>
+</svg></div></main>
+
+<script>
+const svg=document.getElementById('model'), viewport=document.getElementById('viewport');
+const box=svg.viewBox.baseVal, W=box.width,H=box.height; let scale=1;
+function setZoom(next,cx=viewport.clientWidth/2,cy=viewport.clientHeight/2){const x=(viewport.scrollLeft+cx)/scale,y=(viewport.scrollTop+cy)/scale;scale=Math.max(.08,Math.min(2.5,next));svg.style.width=(W*scale)+'px';svg.style.height=(H*scale)+'px';viewport.scrollLeft=x*scale-cx;viewport.scrollTop=y*scale-cy;document.getElementById('zoom').textContent=Math.round(scale*100)+'%';}
+function fit(){setZoom(Math.min((viewport.clientWidth-24)/W,(viewport.clientHeight-24)/H));viewport.scrollLeft=0;viewport.scrollTop=0;}
+document.getElementById('plus').onclick=()=>setZoom(scale*1.2);
+document.getElementById('minus').onclick=()=>setZoom(scale/1.2);
+document.getElementById('fit').onclick=fit;
+document.getElementById('actual').onclick=()=>setZoom(1);
+document.getElementById('print').onclick=()=>window.print();
+viewport.addEventListener('wheel',ev=>{if(ev.ctrlKey||ev.metaKey){ev.preventDefault();const r=viewport.getBoundingClientRect();setZoom(scale*Math.exp(-ev.deltaY*.002),ev.clientX-r.left,ev.clientY-r.top);}},{passive:false});
+let drag=null;
+viewport.addEventListener('pointerdown',ev=>{if(ev.pointerType!=='mouse'||ev.button!==0)return;drag={x:ev.clientX,y:ev.clientY,l:viewport.scrollLeft,t:viewport.scrollTop};viewport.classList.add('dragging');viewport.setPointerCapture(ev.pointerId);});
+viewport.addEventListener('pointermove',ev=>{if(!drag)return;viewport.scrollLeft=drag.l+drag.x-ev.clientX;viewport.scrollTop=drag.t+drag.y-ev.clientY;});
+function endDrag(){drag=null;viewport.classList.remove('dragging');}
+viewport.addEventListener('pointerup',endDrag);viewport.addEventListener('pointercancel',endDrag);
+viewport.addEventListener('keydown',ev=>{if(ev.key==='+'||ev.key==='='){ev.preventDefault();setZoom(scale*1.2);}if(ev.key==='-'){ev.preventDefault();setZoom(scale/1.2);}});
+const copy=svg.cloneNode(true);copy.removeAttribute('style');copy.setAttribute('xmlns','http://www.w3.org/2000/svg');copy.setAttribute('width',W);copy.setAttribute('height',H);
+const style=document.createElementNS('http://www.w3.org/2000/svg','style');style.textContent='.edge text{paint-order:stroke;stroke:white;stroke-width:5px;stroke-linejoin:round;fill:#183a40;font-weight:600}';copy.prepend(style);
+const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(copy)],{type:'image/svg+xml;charset=utf-8'}));document.getElementById('download').href=url;
+document.querySelectorAll('#model .edge').forEach(edge=>{
+ const id=edge.dataset.relationship;
+ const targets=[...document.querySelectorAll('#model .edge')].filter(x=>x.dataset.relationship===id);
+ const diamond=[...document.querySelectorAll('#model .node')].find(x=>x.querySelector('title')?.textContent===id);
+ edge.addEventListener('pointerenter',()=>{targets.forEach(x=>x.classList.add('is-active'));diamond?.classList.add('is-active');});
+ edge.addEventListener('pointerleave',()=>{targets.forEach(x=>x.classList.remove('is-active'));diamond?.classList.remove('is-active');});
+});
+setZoom(1);viewport.scrollLeft=0;viewport.scrollTop=0;
+</script></body></html>
